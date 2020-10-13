@@ -7,8 +7,9 @@
 
 class Queen : public ChessPiece  {
     public:
-        Queen();
-        void move();
+        Queen(bool team = 0, QGraphicsItem *parent = 0);
+        void setImage() override;
+        void move() override;
 };
 
 #endif // QUEEN_H

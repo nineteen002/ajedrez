@@ -5,10 +5,8 @@
 #include <QBrush>
 #include <QColor>
 
-#include "chesspiece.h"
-
 //Represents each block in the chess board
-
+class ChessPiece;
 class BoardBlock : public QGraphicsRectItem {
     private:
         int rowNum;
@@ -26,6 +24,7 @@ class BoardBlock : public QGraphicsRectItem {
         void setColor(QColor color);
         QColor getColor();
 
+        void setLocation(int x, int y);
         void setChessPiece(ChessPiece* piece);
         ChessPiece* getChessPiece();
 

@@ -7,8 +7,9 @@
 
 class Knight : public ChessPiece {
     public:
-        Knight();
-        void move(); //sobrecarga de funcion
+        Knight(bool team = 0, QGraphicsItem *parent = 0);
+        void setImage() override;
+        void move() override;
 };
 
 #endif // KNIGHT_H

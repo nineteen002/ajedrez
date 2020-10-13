@@ -18,21 +18,25 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     bkg_brush.setColor(Qt::white);
     bkg_brush.setStyle(Qt::SolidPattern);
     setBackgroundBrush(bkg_brush);
-
-    drawBoard(width()/2-650,50);
-    this->show();
+  
+    drawBoard(width()/2-650,50); //Draws chessboard squares
+    //Setup pieces
+    setupBlack();
+    setupWhite();
+    //show pieces on the board
+    setupBoard();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
-    for(int i = 0; i < _rows; i++){ //For each row
-        for(int j = 0; j < _columns; j++){ //For each column
+    for(int i = 0; i < 8; i++){ //For each row
+        for(int j = 0; j < 8; j++){ //For each column
 
             BoardBlock *block = new BoardBlock(); //Create a chessboard block
             this->blocks[i][j] = block; //add it to array
             //Calculates position
             int x_step = _size * j;
             int y_step = _size * i;
-
+            block->setLocation(i,j);
             block->setPos(x + x_step, y + y_step); //calculates (x, y) init pos of each block
 
             if((i+j)%2 == 0){
@@ -48,6 +52,95 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
 
 void ChessBoard::addToWindow(QGraphicsItem* item){
     scene->addItem(item);
+}
+
+
+void ChessBoard::setupWhite(){//sets up black chess pieces
+    ChessPiece* piece;
+    for(int i = 0; i < 8; i++){
+        piece = new Pawn(1);
+        white.append(piece);
+    }
+
+    piece = new Rook(1);
+    white.append(piece);
+
+    piece = new Knight(1);
+    white.append(piece);
+
+    piece = new Bishop(1);
+    white.append(piece);
+
+    piece = new Queen(1);
+    white.append(piece);
+
+    piece = new King(1);
+    white.append(piece);
+
+    piece = new Bishop(1);
+    white.append(piece);
+
+    piece = new Knight(1);
+    white.append(piece);
+
+    piece = new Rook(1);
+    white.append(piece);
+}
+
+void ChessBoard::setupBlack(){ //sets up black chess pieces
+    ChessPiece* piece;
+
+    piece = new Rook();
+    black.append(piece);
+
+    piece = new Knight();
+    black.append(piece);
+
+    piece = new Bishop();
+    black.append(piece);
+
+    piece = new Queen();
+    black.append(piece);
+
+    piece = new King();
+    black.append(piece);
+
+    piece = new Bishop();
+    black.append(piece);
+
+    piece = new Knight();
+    black.append(piece);
+
+    piece = new Rook();
+    black.append(piece);
+
+    for(int i = 0; i < 8; i++){
+        piece = new Pawn();
+        black.append(piece);
+    }
+}
+
+void ChessBoard::setupBoard(){ //Puts pieces in the board
+    for(int i = 0; i < 8; i++){
+        for(int j = 0; j < 8; j++){ //Go though board
+
+            BoardBlock* block = blocks[i][j];
+
+            if(i < 2){ //first two rows add black chess piece
+                static int b = 0;
+                block->setChessPiece(black[b]); //add piece to block
+                addToWindow(black[b]); //add piece to window
+                b++;
+            }
+
+            if(i > 5){ //last two rows add black chess piece
+                static int w = 0;
+                block->setChessPiece(white[w]);
+                addToWindow(white[w]);
+                w++;
+            }
+        }
+    }
 }
 
 ChessBoard::~ChessBoard(){

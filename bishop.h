@@ -7,8 +7,9 @@
 
 class Bishop : public ChessPiece {
     public:
-        Bishop();
-        void move(); //sobrecarga de funcion
+        Bishop(bool team = 0, QGraphicsItem *parent = 0);
+        void setImage() override;
+        void move() override; //sobrecarga de funcion
 };
 
 #endif // BISHOP_H

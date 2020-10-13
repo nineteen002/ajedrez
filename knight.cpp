@@ -1,8 +1,16 @@
 #include "knight.h"
 
-Knight::Knight() {
-    //Derived class from Chesspiece
+Knight::Knight(bool team, QGraphicsItem *parent) : ChessPiece(team,parent){
+    setImage();
 }
 
-void Knight::move(){ }
+void Knight::setImage(){
+    if(_team == 0)
+        setPixmap(QPixmap(":/images/knight_blk.png"));
+    else
+        setPixmap(QPixmap(":/images/knight_white.png"));
+}
 
+void Knight::move(){
+
+}

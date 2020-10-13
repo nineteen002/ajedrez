@@ -6,19 +6,24 @@
 
 #include "chesspiece.h"
 #include "boardblock.h"
+#include "queen.h"
+#include "rook.h"
+#include "pawn.h"
+#include "king.h"
+#include "knight.h"
+#include "bishop.h"
 
 class ChessBoard : public QGraphicsView{ //Clase para el tablero
     Q_OBJECT
     private:
-        QGraphicsScene* scene;
 
-        int const _rows = 8; // filas
-        int const _columns = 8; // columnas
-        int const _size = 100; //size of each tile
+        int const _size = 100;
+        QGraphicsScene* scene;
+  
         BoardBlock* blocks[8][8];
 
-        //Chess piece black
-        //Chess piece white
+        QList <ChessPiece*> black;//Chess piece black
+        QList <ChessPiece*> white;//Chess piece white
 
     public:
         ChessBoard(QWidget *parent = 0);
@@ -27,6 +32,11 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
        //drawing
         void drawBoard(int x, int y);
         void addToWindow(QGraphicsItem* item);
+  
+        void setupWhite();
+        void setupBlack();
+
+        void setupBoard();
 };
 
 #endif // CHESSBOARD_H

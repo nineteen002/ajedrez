@@ -5,7 +5,7 @@
 
 //Clase derivada para la pieza del REY
 
-class King {
+class King : public ChessPiece{
     public:
         King();
         void move();

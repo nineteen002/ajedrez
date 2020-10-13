@@ -25,7 +25,6 @@ class BoardBlock : public QGraphicsRectItem {
         QColor getColor();
 
         void setLocation(int x, int y);
-
         void setChessPiece(ChessPiece* piece);
         ChessPiece* getChessPiece();
 

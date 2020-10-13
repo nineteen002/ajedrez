@@ -18,7 +18,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     bkg_brush.setColor(Qt::white);
     bkg_brush.setStyle(Qt::SolidPattern);
     setBackgroundBrush(bkg_brush);
-
+  
     drawBoard(width()/2-650,50); //Draws chessboard squares
     //Setup pieces
     setupBlack();
@@ -36,7 +36,6 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
             //Calculates position
             int x_step = _size * j;
             int y_step = _size * i;
-
             block->setLocation(i,j);
             block->setPos(x + x_step, y + y_step); //calculates (x, y) init pos of each block
 
@@ -54,6 +53,7 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
 void ChessBoard::addToWindow(QGraphicsItem* item){
     scene->addItem(item);
 }
+
 
 void ChessBoard::setupWhite(){//sets up black chess pieces
     ChessPiece* piece;

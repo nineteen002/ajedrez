@@ -1,4 +1,5 @@
 #include "boardblock.h"
+
 #include "chesspiece.h"
 #include <QDebug>
 
@@ -26,7 +27,6 @@ void BoardBlock::setLocation(int x, int y){
     this->rowNum = x;
     this->columnNum = y;
 }
-
 
 void BoardBlock::setChessPiece(ChessPiece* piece){
     //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;

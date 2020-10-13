@@ -16,8 +16,10 @@
 class ChessBoard : public QGraphicsView{ //Clase para el tablero
     Q_OBJECT
     private:
+
         int const _size = 100;
         QGraphicsScene* scene;
+  
         BoardBlock* blocks[8][8];
 
         QList <ChessPiece*> black;//Chess piece black
@@ -30,7 +32,7 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
        //drawing
         void drawBoard(int x, int y);
         void addToWindow(QGraphicsItem* item);
-
+  
         void setupWhite();
         void setupBlack();
 

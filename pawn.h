@@ -8,8 +8,9 @@
 class Pawn : public ChessPiece {
 
     public:
-        Pawn();
-        void move(); //sobrecarga de funcion
+        Pawn(bool team = 0, QGraphicsItem *parent = 0);
+        void setImage() override;
+        void move() override;
 };
 
 #endif // PAWN_H

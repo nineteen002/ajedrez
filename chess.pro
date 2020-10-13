@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     bishop.cpp \
+    boardblock.cpp \
     chessboard.cpp \
     chesspiece.cpp \
     king.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     bishop.h \
+    boardblock.h \
     chessboard.h \
     chesspiece.h \
     king.h \
@@ -38,3 +40,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images_rsc.qrc

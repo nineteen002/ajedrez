@@ -7,8 +7,9 @@
 
 class Rook : public ChessPiece {
     public:
-        Rook();
-        void move();
+        Rook(bool team = 0, QGraphicsItem *parent = 0);
+        void setImage() override;
+        void move() override;
 };
 
 #endif // ROOK_H

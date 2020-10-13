@@ -1,18 +1,32 @@
 #ifndef CHESSPIECE_H
 #define CHESSPIECE_H
 
-//Clase para las piezas
-class ChessPiece {
+#include <QGraphicsPixmapItem>
+
+#include "boardblock.h"
+
+class BoardBlock;
+class ChessPiece : public QGraphicsPixmapItem{
     protected:
-        bool _team; //Blaco o negro
+        bool _team; //Blaco =1 o negro =0
+        bool isPlaced;
+        BoardBlock* currentBlock;
 
         //Posicion en el tablero
 
     public:
 
-        ChessPiece();
+        ChessPiece(bool team = 0, QGraphicsItem *parent = 0);
 
-        virtual void move(); //Will get overwritten in derived classes
+        virtual void setImage() = 0; //Will get overwritten in derived classes
+        virtual void move() = 0; //Will get overwritten in derived classes
+
+        void setCurrentBlock(BoardBlock *block);
+        BoardBlock* getCurrentBlock();
+
+        void setTeam(bool team);
+        bool getTeam();
+
 };
 
 #endif // CHESSPIECE_H

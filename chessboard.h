@@ -18,12 +18,18 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
     private:
 
         int const _size = 100;
+        bool _turn;
+
         QGraphicsScene* scene;
-  
-        BoardBlock* blocks[8][8];
 
         QList <ChessPiece*> black;//Chess piece black
+        QList <ChessPiece*> deadBlack;
+
         QList <ChessPiece*> white;//Chess piece white
+        QList <ChessPiece*> deadWhite;
+
+        QList <QGraphicsItem*> listItems;
+
 
     public:
         ChessBoard(QWidget *parent = 0);
@@ -31,12 +37,23 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
 
        //drawing
         void drawBoard(int x, int y);
-        void addToWindow(QGraphicsItem* item);
-  
+
+        //setup of board
+        void setupBoard();
         void setupWhite();
         void setupBlack();
 
-        void setupBoard();
+        //Window related
+        void addToWindow(QGraphicsItem* item);
+        void removeFromWindow(QGraphicsItem* item);
+
+        //Turn related
+        void setTurn(bool turn);
+        bool getTurn();
+        void changeTurn();
+
+
+        BoardBlock* blocks[8][8];
 };
 
 #endif // CHESSBOARD_H

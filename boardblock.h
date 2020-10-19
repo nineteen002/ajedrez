@@ -13,7 +13,7 @@ class BoardBlock : public QGraphicsRectItem {
         int columnNum;
         ChessPiece* piece;
 
-        QColor color;
+        QColor originalColor;
         QBrush brush;
         bool hasChessPiece;
 
@@ -21,10 +21,19 @@ class BoardBlock : public QGraphicsRectItem {
         BoardBlock(QGraphicsItem *parent=0);
         ~BoardBlock();
 
+        //Color related
         void setColor(QColor color);
         QColor getColor();
 
+        void resetColor();
+        void setOriginalColor(QColor color);
+        QColor getOriginalColor();
+
         void setLocation(int x, int y);
+        int getRowLocation();
+        int getColumnLocation();
+
+        //Chess piece related
         void setChessPiece(ChessPiece* piece);
         ChessPiece* getChessPiece();
 

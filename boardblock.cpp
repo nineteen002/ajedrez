@@ -14,20 +14,39 @@ BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     this->piece = nullptr;
 }
 
+//Color Related
 void BoardBlock::setColor(QColor color){ //Sets color of block
     brush.setColor(color);
     setBrush(color);
 }
 
+void BoardBlock::setOriginalColor(QColor color){
+    this->originalColor = color;
+}
+
+QColor BoardBlock::getOriginalColor(){
+    return this->originalColor;
+}
+
+/*
 QColor BoardBlock::getColor(){
     return this->color;
-}
+}*/
 
 void BoardBlock::setLocation(int x, int y){
     this->rowNum = x;
     this->columnNum = y;
 }
 
+int BoardBlock::getRowLocation(){
+    return this->rowNum;
+}
+
+int BoardBlock::getColumnLocation(){
+    return this->columnNum;
+}
+
+//Chesspiece related
 void BoardBlock::setChessPiece(ChessPiece* piece){
     //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
     piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);

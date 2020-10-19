@@ -53,6 +53,7 @@ void BoardBlock::setChessPiece(ChessPiece* piece){
     //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
     piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);
     piece->setCurrentBlock(this);
+    hasChessPiece = true;
     this->piece = piece;
 }
 

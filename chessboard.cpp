@@ -28,7 +28,7 @@ void ChessBoard::start(){
     //show pieces on the board
     setupBoard();
     qDebug() << "3" << this->blocks;
-    blocks[7][1]->getChessPiece()->move();
+    blocks[0][1]->getChessPiece()->move();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates

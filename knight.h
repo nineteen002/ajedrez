@@ -12,4 +12,6 @@ class Knight : public ChessPiece {
         void move() override;
 };
 
+
+
 #endif // KNIGHT_H

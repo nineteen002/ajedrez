@@ -10,6 +10,7 @@ BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     brush.setStyle(Qt::SolidPattern);//bushstyle
     setZValue(-1);
 
+    this->hasChessPiece = false;
     this->rowNum = 0;
     this->columnNum = 0;
     this->piece = nullptr;

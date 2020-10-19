@@ -1,8 +1,9 @@
 #include "boardblock.h"
-
+#include "chessboard.h"
 #include "chesspiece.h"
 #include <QDebug>
 
+extern ChessBoard* board;
 BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     //make square block
     setRect(0,0,100,100);
@@ -50,11 +51,16 @@ int BoardBlock::getColumnLocation(){
 void BoardBlock::setChessPiece(ChessPiece* piece){
     //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
     piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);
+    piece->setCurrentBlock(this);
     this->piece = piece;
 }
 
 ChessPiece* BoardBlock::getChessPiece(){
     return this->piece;
+}
+
+bool BoardBlock::hasPiece(){
+    return hasChessPiece;
 }
 
 BoardBlock::~BoardBlock(){

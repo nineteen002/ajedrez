@@ -1,6 +1,8 @@
 #include "chesspiece.h"
+#include "chessboard.h"
 
 //Clase para las piezas
+extern ChessBoard* board;
 ChessPiece::ChessPiece(bool team, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
     this->_team = team;
     this->isPlaced = true;
@@ -23,7 +25,7 @@ bool ChessPiece::getTeam(){
 }
 
 QString ChessPiece::getSide(){
-    if(_team == 0){
+    if(this->_team == 0){
         return "Black";
     }
     else{

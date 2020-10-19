@@ -2,9 +2,9 @@
 #define PAWN_H
 
 #include "chesspiece.h"
+#include "chessboard.h"
 
 //Clase derivada de la pieza de ajedrez peon
-
 class Pawn : public ChessPiece {
 
     public:

@@ -18,14 +18,17 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     bkg_brush.setColor(Qt::white);
     bkg_brush.setStyle(Qt::SolidPattern);
     setBackgroundBrush(bkg_brush);
-  
+}
+
+void ChessBoard::start(){
     drawBoard(width()/2-650,50); //Draws chessboard squares
     //Setup pieces
     setupBlack();
     setupWhite();
     //show pieces on the board
     setupBoard();
-    //blocks[6][1]->getChessPiece()->move();
+    qDebug() << "3" << this->blocks;
+    blocks[6][1]->getChessPiece()->move();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates

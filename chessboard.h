@@ -52,6 +52,8 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
         bool getTurn();
         void changeTurn();
 
+        void start();
+
 
         BoardBlock* blocks[8][8];
 };

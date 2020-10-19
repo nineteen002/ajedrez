@@ -25,6 +25,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     setupWhite();
     //show pieces on the board
     setupBoard();
+    //blocks[6][1]->getChessPiece()->move();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
@@ -36,24 +37,22 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
             //Calculates position
             int x_step = _size * j;
             int y_step = _size * i;
+
             block->setLocation(i,j);
             block->setPos(x + x_step, y + y_step); //calculates (x, y) init pos of each block
 
             if((i+j)%2 == 0){
-                block->setColor(QColor(42,154,79)); //set color green
+                block->setOriginalColor(QColor(42,154,79));
+                block->setColor(QColor(42,154,79));//set color green
             } else {
-                block->setColor(QColor(186,190,107)); //set color yellowish
+                block->setOriginalColor(QColor(186,190,107)); //set color yellowish
+                block->setColor(QColor(186,190,107));
             }
 
             this->addToWindow(block); //Add it to window
         }
     }
 }
-
-void ChessBoard::addToWindow(QGraphicsItem* item){
-    scene->addItem(item);
-}
-
 
 void ChessBoard::setupWhite(){//sets up black chess pieces
     ChessPiece* piece;
@@ -140,6 +139,26 @@ void ChessBoard::setupBoard(){ //Puts pieces in the board
                 w++;
             }
         }
+    }
+}
+
+void ChessBoard::addToWindow(QGraphicsItem* item){
+    scene->addItem(item);
+}
+
+void ChessBoard::setTurn(bool turn){
+    this->_turn = turn;
+}
+
+bool ChessBoard::getTurn(){
+    return this->_turn;
+}
+
+void ChessBoard::changeTurn(){
+    if(this->getTurn() == 0){
+        this->setTurn(1);
+    } else {
+        this->setTurn(0);
     }
 }
 

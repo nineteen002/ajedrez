@@ -21,3 +21,18 @@ void ChessPiece::setTeam(bool team){
 bool ChessPiece::getTeam(){
     return this->_team;
 }
+
+QString ChessPiece::getSide(){
+    if(_team == 0){
+        return "Black";
+    }
+    else{
+        return "White";
+    }
+}
+
+void ChessPiece::colorPossibleLocations(BoardBlock *box){
+
+    box->setColor(QColor(148, 173, 214));
+}
+

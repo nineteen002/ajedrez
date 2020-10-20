@@ -33,7 +33,9 @@ class ChessPiece : public QGraphicsPixmapItem{
         void setPlaced(bool placed);
         bool getIsPlaced();
 
+        QList <BoardBlock*> getPossibleLocations();
         void colorPossibleLocations(BoardBlock *box);
+        void unselect();
 
 };
 

@@ -16,6 +16,57 @@ BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     this->piece = nullptr;
 }
 
+void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *event){
+
+    //Haven't selected a piece
+    if(!board->selectedPiece){
+        if(this->hasPiece() && board->getTurn() == this->getChessPiece()->getTeam()){ //if it has a piece and its from the side who's turn it is then
+            this->getChessPiece()->move();
+            board->selectedPiece = this->getChessPiece();
+            return;
+        }
+    }
+    if(board->selectedPiece){ //Had previously selected piece
+        if(this->hasPiece() && board->getTurn() == this->getChessPiece()->getTeam()){ //has a piece but its from the same team
+            board->selectedPiece->unselect();
+            this->getChessPiece()->move();
+            board->selectedPiece = this->getChessPiece();
+            return;
+        }
+
+
+        //check if the position selected is available in the possibles moved from the piece
+
+        QList <BoardBlock*> moveLocations = board->selectedPiece->getPossibleLocations();
+
+        bool possible = false;
+        for(int i = 0; i < moveLocations.count(); i++){
+            if(moveLocations[i] == this){
+                possible = true;
+            }
+        }
+        //IF ITS A POSSIBLE MOVE
+        if(possible){
+            board->selectedPiece->isFirstMove = false;// applies to pawn
+            board->selectedPiece->unselect(); //change color back
+
+            //check if its box selected is NOT empty
+            if(this->hasPiece()){
+                ChessPiece* eaten = this->getChessPiece();
+                eaten->setCurrentBlock(nullptr);
+                this->setChessPiece(nullptr);
+                board->removeFromWindow(eaten);
+            }
+
+            board->selectedPiece->getCurrentBlock()->setChessPiece(nullptr); //PREVIOUS BOX CLEAN
+            this->setChessPiece(board->selectedPiece); //Move selected piece to current box
+
+            board->selectedPiece = nullptr; //unselect
+            board->changeTurn();
+        }
+    }
+}
+
 //Color Related
 void BoardBlock::setColor(QColor color){ //Sets color of block
     brush.setColor(color);
@@ -50,11 +101,17 @@ int BoardBlock::getColumnLocation(){
 
 //Chesspiece related
 void BoardBlock::setChessPiece(ChessPiece* piece){
-    //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
-    piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);
-    piece->setCurrentBlock(this);
-    hasChessPiece = true;
-    this->piece = piece;
+    if(!piece){
+        hasChessPiece = false;
+        this->piece = nullptr;
+    }
+    else{
+        //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
+        piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);
+        piece->setCurrentBlock(this);
+        hasChessPiece = true;
+        this->piece = piece;
+    }
 }
 
 ChessPiece* BoardBlock::getChessPiece(){

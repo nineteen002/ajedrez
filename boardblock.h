@@ -4,6 +4,7 @@
 #include <QGraphicsRectItem>
 #include <QBrush>
 #include <QColor>
+#include <QGraphicsSceneMouseEvent>
 
 //Represents each block in the chess board
 class ChessPiece;
@@ -20,6 +21,8 @@ class BoardBlock : public QGraphicsRectItem {
     public:
         BoardBlock(QGraphicsItem *parent=0);
         ~BoardBlock();
+
+        void mousePressEvent(QGraphicsSceneMouseEvent *event);
 
         //Color related
         void setColor(QColor color);

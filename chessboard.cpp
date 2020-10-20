@@ -18,6 +18,8 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     bkg_brush.setColor(Qt::white);
     bkg_brush.setStyle(Qt::SolidPattern);
     setBackgroundBrush(bkg_brush);
+
+    selectedPiece = nullptr;
 }
 
 void ChessBoard::start(){
@@ -28,8 +30,8 @@ void ChessBoard::start(){
     //show pieces on the board
     setupBoard();
     qDebug() << "3" << this->blocks;
-    blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
-    blocks[3][4]->getChessPiece()->move();//try to move horce
+    //blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
+    //blocks[1][1]->getChessPiece()->move();//try to move pawn
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
@@ -148,6 +150,10 @@ void ChessBoard::setupBoard(){ //Puts pieces in the board
 
 void ChessBoard::addToWindow(QGraphicsItem* item){
     scene->addItem(item);
+}
+
+void ChessBoard::removeFromWindow(QGraphicsItem* item){
+    scene->removeItem(item);
 }
 
 void ChessBoard::setTurn(bool turn){

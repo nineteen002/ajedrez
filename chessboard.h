@@ -56,6 +56,7 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
 
 
         BoardBlock* blocks[8][8];
+        ChessPiece* selectedPiece;
 };
 
 #endif // CHESSBOARD_H

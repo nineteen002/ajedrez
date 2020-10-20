@@ -53,11 +53,11 @@ void Pawn::move(){
             }
         }
         //EATS TO THE SIDES:
-        if(row < 7 && column > 0 && board->blocks[row+1][column-1]->hasPiece() && board->blocks[row-1][column-1]->getChessPiece()->getSide() == "White") {//CHECK LEFT and 1 up
+        if(row < 7 && column > 0 && board->blocks[row+1][column-1]->hasPiece() && board->blocks[row+1][column-1]->getChessPiece()->getSide() == "White") {//CHECK LEFT and 1 up
             location.append(board->blocks[row+1][column-1]);
             colorPossibleLocations(location.last());
         }
-        if(row > 7 && column < 7 && board->blocks[row+1][column+1]->hasPiece() && board->blocks[row-1][column+1]->getChessPiece()->getSide() == "White") {//CHECK Right and 1 up
+        if(row < 7 && column < 7 && board->blocks[row+1][column+1]->hasPiece() && board->blocks[row+1][column+1]->getChessPiece()->getSide() == "White") {//CHECK Right and 1 up
             location.append(board->blocks[row+1][column+1]);
             colorPossibleLocations(location.last());
         }

@@ -20,6 +20,7 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *event){
 
     //Haven't selected a piece
     if(!board->selectedPiece){
+        //qDebug() <<  board->getTurn() << this->getChessPiece()->getTeam();
         if(this->hasPiece() && board->getTurn() == this->getChessPiece()->getTeam()){ //if it has a piece and its from the side who's turn it is then
             this->getChessPiece()->move();
             board->selectedPiece = this->getChessPiece();

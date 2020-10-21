@@ -10,7 +10,7 @@ void Bishop::setImage(){
     else
         setPixmap(QPixmap(":/images/bishop_white.png"));
 }
-
+//Comentario tonto 
 void Bishop::move(){
 
 }

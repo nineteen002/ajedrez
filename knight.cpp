@@ -1,5 +1,6 @@
 #include "knight.h"
 #include "chessboard.h"
+#include <QDebug>
 
 extern ChessBoard *board;
 Knight::Knight(bool team, QGraphicsItem *parent) : ChessPiece(team,parent){
@@ -14,6 +15,7 @@ void Knight::setImage(){
 }
 
 void Knight::move(){
+    location.clear();
     int row = this->getCurrentBlock()->getRowLocation();
     int column = this->getCurrentBlock()->getColumnLocation();
     int i, j;
@@ -22,26 +24,17 @@ void Knight::move(){
     //top left
     i = row - 2;
     j = column - 1;
+    //qDebug() << board->blocks[i][j]->hasPiece();
     if ( i >= 0 && j >= 0 && board->blocks[i][j]->hasPiece() == true) {
         if (board->blocks[i][j]->getChessPiece()->getSide() != team){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i >= 0 && j >= 0 ){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -49,51 +42,34 @@ void Knight::move(){
     //top right
     i = row - 2;
     j = column + 1;
+    //qDebug() << board->blocks[i][j]->hasPiece();
     if (i >= 0 && j <=7 && board->blocks[i][j]->hasPiece() == true) {
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i >= 0 && j <= 7 ){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
+
     //right top
     i = row - 1;
     j = column + 2;
     if (i >= 0 && j <= 7 && board->blocks[i][j]->hasPiece() == true) {
+        //qDebug() << board->blocks[i][j]->getChessPiece()->getSide() << team;
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i >= 0 && j <= 7 ){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -103,23 +79,13 @@ void Knight::move(){
     if (i <= 7 && j <= 7 && board->blocks[i][j]->hasPiece() == true) {
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i <= 7 && j <= 7 ){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -130,23 +96,13 @@ void Knight::move(){
     if (i >= 0 && j >= 0 && board->blocks[i][j]->hasPiece() == true) {
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i >= 0 && j >= 0){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -157,23 +113,13 @@ void Knight::move(){
     if (i <= 7 && j >= 0 && board->blocks[i][j]->hasPiece() == true) {
         if ( (board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i <= 7 && j >= 0){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -184,23 +130,13 @@ void Knight::move(){
     if (i <= 7 && j >= 0 && board->blocks[i][j]->hasPiece() == true) {
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
         if (i <= 7 && j >= 0){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 
@@ -211,23 +147,13 @@ void Knight::move(){
     if (i <= 7 && j <= 7 && board->blocks[i][j]->hasPiece() == true) {
         if ((board->blocks[i][j]->getChessPiece()->getSide() != team)){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
     else {
-        if (i >= 0 && j >= 0){
+        if (i <= 7 && j <= 7){
             location.append(board->blocks[i][j]);
-            if (location.last()->hasPiece()){
-                colorPossibleLocations(location.last());
-            }
-            else {
-                colorPossibleLocations(location.last());
-            }
+            colorPossibleLocations(location.last());
         }
     }
 

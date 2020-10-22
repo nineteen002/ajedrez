@@ -146,7 +146,7 @@ void ChessBoard::setupBoard(){ //Puts pieces in the board
             }
         }
     }
-    this->setTurn(0);
+    this->setTurn(1);
 }
 
 void ChessBoard::addToWindow(QGraphicsItem* item){

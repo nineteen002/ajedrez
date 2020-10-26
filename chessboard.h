@@ -53,9 +53,12 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
         void changeTurn();
 
         void start();
+        void gameOver(ChessPiece*);
 
 
         BoardBlock* blocks[8][8];
+        ChessPiece* kings[2];
+        bool isGameOver;
         ChessPiece* selectedPiece;
 };
 

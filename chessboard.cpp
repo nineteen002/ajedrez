@@ -20,6 +20,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     setBackgroundBrush(bkg_brush);
 
     selectedPiece = nullptr;
+    this->isGameOver = false;
 }
 
 void ChessBoard::start(){
@@ -29,9 +30,29 @@ void ChessBoard::start(){
     setupWhite();
     //show pieces on the board
     setupBoard();
+    qDebug() << "DEAD KING" ;
     qDebug() << "3" << this->blocks;
     //blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
     //blocks[1][1]->getChessPiece()->move();//try to move pawn
+}
+
+void ChessBoard::gameOver(ChessPiece* king){
+    QGraphicsTextItem* gameOver = new QGraphicsTextItem();
+    gameOver->setPos(900,50);
+    gameOver->setZValue(1);
+    gameOver->setDefaultTextColor(Qt::red);
+    gameOver->setFont(QFont("",30));
+
+    if(king->getSide() == "Black"){
+        gameOver->setPlainText("GAME OVER: White won!");
+    }
+    else{
+        gameOver->setPlainText("GAME OVER: Black won!");
+    }
+
+    addToWindow(gameOver);
+
+    //ChessBoard::close();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
@@ -81,6 +102,7 @@ void ChessBoard::setupWhite(){//sets up black chess pieces
 
     piece = new King(1);
     white.append(piece);
+    kings[1] = piece;
 
     piece = new Bishop(1);
     white.append(piece);
@@ -109,6 +131,7 @@ void ChessBoard::setupBlack(){ //sets up black chess pieces
 
     piece = new King();
     black.append(piece);
+    kings[0] = piece;
 
     piece = new Bishop();
     black.append(piece);

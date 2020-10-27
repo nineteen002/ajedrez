@@ -5,6 +5,7 @@
 extern ChessBoard *board;
 King::King(bool team, QGraphicsItem *parent) : ChessPiece(team,parent){
     setImage();
+    isFirstMove = true;
 }
 
 void King::setImage(){
@@ -21,6 +22,17 @@ void King::move(){
     int i = 0;
     int j = 0;
     QString team = this->getCurrentBlock()->getChessPiece()->getSide();
+
+    //Enroque
+    i = row;
+    j = column;
+    if  (this->isFirstMove == true){
+        //short Castling
+        if (board->blocks[i][j+1]->hasPiece() == false && board->blocks[i][j+2]->hasPiece() == false){
+            location.append(board->blocks[i][j+2]);
+            colorPossibleLocations(location.last());
+        }
+    }
 
     //Top
     i = row - 1;

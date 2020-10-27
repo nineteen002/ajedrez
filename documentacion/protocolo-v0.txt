@@ -1,0 +1,111 @@
+Protocolo TCP
+Servidor
+Puerto: 4994
+
+ESTADO "Iniciar lobby":
+	C->S
+		Se conecta
+		Envia nombre usuario (no unico)
+		
+	S->C
+		Envia sala
+		Asigna equipo
+		Envia mensaje tipo "Oponente en sala"
+		
+		
+		(Arranque al conectarse 2ndo jugador)
+		"Oponente en sala": Envia nombre de jugador (oponente) (a ambos jugadores en sala)
+		Connecta chat
+		El servidor enviara un mensaje de empezar partida una vez que haya 2 persona en la sala
+		Enviar a estado "JUGANDO"
+
+FORMATO PAQUETE (C->S): nombre de usuario
+	tipo de paquete: 0
+	longitud de nombre de usuario
+	nombre de usuario
+
+FORMATO PAQUETE (S->C) : entrada a sala
+	tipo paquete: 1
+	numero de sala
+	booleano equipo (0 - negro, 1 - blanco)
+	
+FORMATO PAQUETE(S->C) : Oponente en sala
+	tipo paquete: 2
+	longitud de nombre de oponente
+	nombre de oponente
+	bool inicio de partida (1 - para iniciar partida)
+	
+		
+ESTADO "JUGANDO":
+	REPETIR HASTA "ESTADO VICTORIA":
+		C->S
+			Envia movimiento
+		
+		S->C
+			Comprueba validez de movimiento
+				Si el movimiento no es valido enviar a estado de ERROR
+			Envia movimiento al otro jugador
+			Envia cambio de turno a J{0,1}
+			
+		Si un jugador se desconecta enviar a estado de DESCONEXION
+
+FORMATO PAQUETE (C->S): enviar movimiento
+	tipo paquete: 3
+	uint pieza: Numero entero de 0-63	(indica posicion en el tablero de la pieza a mover)
+	uint movimiento: Numero entero de 0-63	(indica posicion en el tablero a la cual se quiere mover)
+
+FORMATO PAQUETE(S->C): verificar movimiento
+	tipo paquete: 4
+	uint validez: si es 99 entonces enviar a ERROR, si es un 0 entonces continuar como si nada xD
+	uint pieza: Numero entero de 0-63	(indica posicion en el tablero de la pieza a mover)
+	uint movimiento: Numero entero de 0-63	(indica posicion en el tablero a la cual se quiere mover)
+	bool turno: (0 || 1 )
+
+ESTADO "VICTORIA":
+	C->S
+		Envia muerte del rey
+		
+	S->C
+		Verifica muerte del rey
+		Envia movimiento victorioso
+		Cantar victoria
+		Enviar opcion de nueva partida
+		
+	C{0}->S
+		Enviar respuesta de nueva partida
+	
+	C{1}->S
+		Enviar respuesta de nueva partida
+		
+	S->C
+		Si ambos jugadores quieren nueva partida enviar a estado de jugando
+		Si No: 
+			Cerrar sala
+
+
+FORMATO PAQUETE(S->C): victoria
+	tipo paquete: 5
+	bool equipo_gandor: (0 || 1)
+	
+FORMATO PAQUETE(C->S): Partida
+	tipo paquete: 6
+	bool jugar?: 0 si quiere salir de sala, 1 para volver a jugar
+	
+FORMATO PAQUETE(S->C): Nueva Partida
+	tipo paquete: 7
+	bool oponent quiere jugar: (0 || 1)
+			
+ESTADO "ERROR":
+	S->C:
+		Si movimiento no es valido enviar mensaje de "trampa"
+		Cerrar partida
+		
+ESTADO "DESCONEXION":
+	S->C:
+		enviar mensaje de "Victoria por abandono"
+		Cerrar partida
+
+FORMATO PAQUETE(S->C):
+	tipo paquete:8
+	tipo error: 0 (error trampa), 1 (error de desconexion)
+	cierre de conexion

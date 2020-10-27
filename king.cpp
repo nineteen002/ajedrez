@@ -23,7 +23,7 @@ void King::move(){
     int j = 0;
     QString team = this->getCurrentBlock()->getChessPiece()->getSide();
 
-    //Enroque
+    //Castling
     i = row;
     j = column;
     if  (this->isFirstMove == true){

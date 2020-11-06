@@ -6,6 +6,7 @@ extern ChessBoard* board;
 ChessPiece::ChessPiece(bool team, QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
     this->_team = team;
     this->isPlaced = true;
+    isFirstMove = true;
 }
 
 void ChessPiece::setCurrentBlock(BoardBlock *block){

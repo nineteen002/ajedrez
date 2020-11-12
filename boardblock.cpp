@@ -16,7 +16,7 @@ BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     this->piece = nullptr;
 }
 
-void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *event){
+void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
     if(!board->isGameOver){ //if game still going
         //Haven't selected a piece
         if(!board->selectedPiece){
@@ -48,7 +48,7 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *event){
             }
             //IF ITS A POSSIBLE MOVE
             if(possible){
-                board->selectedPiece->isFirstMove = false;// applies to pawn
+                board->selectedPiece->isFirstMove = false;// applies to pawn and king
                 board->selectedPiece->unselect(); //change color back
 
                 //check if its box selected is NOT empty

@@ -23,17 +23,6 @@ void King::move(){
     int j = 0;
     QString team = this->getCurrentBlock()->getChessPiece()->getSide();
 
-    //Castling
-    i = row;
-    j = column;
-    if  (this->isFirstMove == true){
-        //short Castling
-        if (board->blocks[i][j+1]->hasPiece() == false && board->blocks[i][j+2]->hasPiece() == false){
-            location.append(board->blocks[i][j+2]);
-            colorPossibleLocations(location.last());
-        }
-    }
-
     //Top
     i = row - 1;
     j = column;

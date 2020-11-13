@@ -24,19 +24,23 @@ void King::move(){
     QString team = this->getCurrentBlock()->getChessPiece()->getSide();
 
     //Castling
-    i = row;
-    j = column;
-    if  (this->isFirstMove == true){
-        //short Castling
-        if (board->blocks[i][j+1]->hasPiece() == false && board->blocks[i][j+2]->hasPiece() == false && board->blocks[i][j+3]->getChessPiece()->isFirstMove == true){
-            location.append(board->blocks[i][j+2]);
-            colorPossibleLocations(location.last());
+        i = row;
+        j = column;
+        if  (this->isFirstMove == true){
+            //Short castling
+            if (board->blocks[i][j+1]->hasPiece() == false && board->blocks[i][j+2]->hasPiece() == false && board->blocks[i][j+3]->getChessPiece()->isFirstMove == true){
+                location.append(board->blocks[i][j+2]);
+                colorPossibleLocations(location.last());
+                castling = true;
+            }
+            //Long castling
+            if (board->blocks[i][j-1]->hasPiece() == false && board->blocks[i][j-2]->hasPiece() == false && board->blocks[i][j-3]->hasPiece() == false && board->blocks[i][j-4]->getChessPiece()->isFirstMove == true){
+                location.append(board->blocks[i][j-2]);
+                colorPossibleLocations(location.last());
+                castling = true;
+            }
         }
-        else if (board->blocks[i][j-1]->hasPiece() == false && board->blocks[i][j-2]->hasPiece() == false && board->blocks[i][j-3]->hasPiece() == false && board->blocks[i][j-4]->getChessPiece()->isFirstMove == true){
-            location.append(board->blocks[i][j-2]);
-            colorPossibleLocations(location.last());
-        }
-    }
+
 
     //Top
     i = row - 1;

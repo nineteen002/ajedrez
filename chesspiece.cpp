@@ -7,6 +7,7 @@ ChessPiece::ChessPiece(bool team, QGraphicsItem *parent) : QGraphicsPixmapItem(p
     this->_team = team;
     this->isPlaced = true;
     isFirstMove = true;
+    castling = false;
 }
 
 void ChessPiece::setCurrentBlock(BoardBlock *block){

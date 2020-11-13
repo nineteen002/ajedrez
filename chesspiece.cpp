@@ -53,3 +53,25 @@ void ChessPiece::unselect(){  //returns original color of possible locations
         location[i]->setColor(org_color);
     }
 }
+
+//void ChessPiece::castling(bool team, bool cast){
+//      location.clear();
+//      int row = -1;
+//      int column = -1;
+//    int i = 0;
+//    int j = 0;
+//    QString team = this->getCurrentBlock()->getChessPiece()->getSide();
+//      if (team == true){//true = white
+//          row = 7;
+//      }
+//      else{
+//          row = 0;
+//      }
+//      if (cast == true){// true = short castling
+//         column = 5;
+//      }
+//      else{
+//          column = 3;
+//      }
+
+//}

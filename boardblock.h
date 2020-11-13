@@ -39,7 +39,7 @@ class BoardBlock : public QGraphicsRectItem {
         //Chess piece related
         void setChessPiece(ChessPiece* piece);
         ChessPiece* getChessPiece();
-
+        void castling(bool team, bool castling);
         bool hasPiece();
 };
 

@@ -18,6 +18,7 @@ class ChessPiece : public QGraphicsPixmapItem{
 
     public:
         bool isFirstMove;
+        bool castling;
         ChessPiece(bool team = 0, QGraphicsItem *parent = 0);
 
         virtual void setImage() = 0; //Will get overwritten in derived classes

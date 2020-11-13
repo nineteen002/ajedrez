@@ -67,7 +67,6 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
 
             block->setLocation(i,j);
             block->setPos(x + x_step, y + y_step); //calculates (x, y) init pos of each block
-
             if((i+j)%2 == 0){
                 block->setOriginalColor(QColor(42,154,79));
                 block->setColor(QColor(42,154,79));//set color green

@@ -8,6 +8,7 @@
 #include "socket.h"
 #include "loby.h"
 
+ChessBoard *board;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

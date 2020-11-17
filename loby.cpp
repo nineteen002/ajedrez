@@ -2,8 +2,7 @@
 #include "ui_loby.h"
 #include "chessboard.h"
 
-ChessBoard *board;
-
+extern ChessBoard* board;
 Loby::Loby(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Loby)

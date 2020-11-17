@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,7 +20,8 @@ SOURCES += \
     mainwindow.cpp \
     pawn.cpp \
     queen.cpp \
-    rook.cpp
+    rook.cpp \
+    socket.cpp
 
 HEADERS += \
     bishop.h \
@@ -31,7 +33,8 @@ HEADERS += \
     mainwindow.h \
     pawn.h \
     queen.h \
-    rook.h
+    rook.h \
+    socket.h
 
 FORMS += \
     mainwindow.ui

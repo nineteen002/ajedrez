@@ -15,6 +15,7 @@ SOURCES += \
     chesspiece.cpp \
     king.cpp \
     knight.cpp \
+    loby.cpp \
     main.cpp \
     pawn.cpp \
     queen.cpp \
@@ -27,11 +28,13 @@ HEADERS += \
     chesspiece.h \
     king.h \
     knight.h \
+    loby.h \
     pawn.h \
     queen.h \
     rook.h
 
-FORMS +=
+FORMS += \
+    loby.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

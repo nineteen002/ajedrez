@@ -13,8 +13,13 @@ void Socket::connect(){
         qDebug() << "Coneccted to server";
 
         //sending info
-        socket->write("Ive changed since you tried me.. lets see if it works again\r\n");
-        //this->sendInitialConectionPackage();
+        socket->write("Socket de Fer Prueba4-1");
+
+        socket->waitForBytesWritten(100);
+        socket->waitForReadyRead(3000);
+        qDebug() << "Reading: " << socket->bytesAvailable();
+        qDebug() << socket->readAll();
+
         socket->close();
     }
     else{
@@ -23,15 +28,9 @@ void Socket::connect(){
 }
 
 void Socket::sendInitialConectionPackage(){
-    QString typePackage = "0";
-    QString rsrv = "0101";
+    QString package = "0";
 
-    QByteArray bytes = typePackage.toUtf8();
+    QByteArray bytes("hello", 1);
     int length = bytes.size(); //Number of bytes
     qDebug() << "Bytes: " << bytes <<" Length is:" << length;
-
-    QByteArray rsrv_bytes = rsrv.toUtf8();
-    int rsrv_length = rsrv_bytes.size(); //Number of bytes
-    qDebug() << "Bytes: " << rsrv_bytes <<" Length is:" << rsrv_length;
-
 }

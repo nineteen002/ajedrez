@@ -29,8 +29,9 @@ public:
 
     int error;
     bool isIpv4, isIpv6;
-    void createSocket();
+    void createSocket(struct addrinfo*);
 
+    void startConnectionWithServer(char* serverName, char* port);
     void doDnsResolution(char* serverName, char* port);
     void createServerSocket();
 
@@ -45,10 +46,8 @@ signals:
 private:
     SOCKET clientSocket;
     struct addrinfo *dnsResults;
-    LPSOCKADDR socketaddr_ip;
     struct sockaddr *server;
-    struct sockaddr_in6 *ipv6;
-    struct sockaddr_in *ipv4;
+
 };
 
 #endif // SOCKET_H

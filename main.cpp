@@ -11,12 +11,11 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     char serverName[50] = "ajedrez.elinfelix.xserver.fun";
+    if(serverName[strlen(serverName) - 1] == '\n') serverName[strlen(serverName) -1] = '\0';
+
     char port[5] = "4994";
     Socket socket;
-    socket.createSocket();
-    socket.doDnsResolution(serverName, port);
-    socket.createServerSocket();
-    //socket.connect();
+    socket.startConnectionWithServer(serverName, port);
 
     board = new ChessBoard();
     qDebug() << "1" <<board;

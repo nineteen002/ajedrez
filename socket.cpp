@@ -166,13 +166,9 @@ int Socket::inet_pton6(const char *src, char *dst)
     return 1;
 }
 
-void Socket::createSocket(){
-    if((clientSocket = socket(AF_INET6, SOCK_STREAM, 0)) == INVALID_SOCKET){
-        qDebug() << "ERROR: No se pudo crear el socket";
-        error = -1;
-    }
-
-    qDebug() << "Socket creado correctamente";
+void Socket::startConnectionWithServer(char* serverName, char* port){
+    this->doDnsResolution(serverName, port);
+    this->createServerSocket();
 }
 
 void Socket::doDnsResolution(char* serverName, char* port){
@@ -193,50 +189,55 @@ void Socket::doDnsResolution(char* serverName, char* port){
 }
 
 void Socket::createServerSocket(){
-    struct addrinfo *save;
-    wchar_t ipstringbuffer[46];
-
-    for(save = dnsResults; save != nullptr; save = save->ai_next){
-            //IPV4
+    struct addrinfo *save= dnsResults;
+    for(save = dnsResults; dnsResults != nullptr; dnsResults = dnsResults->ai_next){
+        //IPV4
         if(dnsResults->ai_family == AF_INET){
             qDebug() << "IPv4";
-            isIpv4 = true;
-            server = dnsResults->ai_addr;
-            ipv4 = (struct sockaddr_in*) &dnsResults->ai_addr;
+            createSocket(dnsResults);
         } //IPV6
-        else{
+        else if(dnsResults->ai_family == AF_INET6){
             qDebug() << "IPv6";
-            isIpv6 = true;
-            this->socketaddr_ip = (LPSOCKADDR) dnsResults->ai_addr;
-            // The buffer length is changed by each call to WSAAddresstoString
-            // So we need to set it for each iteration through the loop for safety
-            DWORD ipbufferlength = 46;
-            int iRetval = WSAAddressToString(socketaddr_ip, (DWORD) dnsResults->ai_addrlen, NULL,
-                                         ipstringbuffer, &ipbufferlength);
-            if (iRetval)
-                printf("WSAAddressToString failed with %u\n", WSAGetLastError() );
-            else
-                printf("\tIPv6 address %s\n", ipstringbuffer);
-            server = dnsResults->ai_addr;
-            ipv6 = (struct sockaddr_in6*) &dnsResults->ai_addr;
+            createSocket(dnsResults);
         }
         connect();
     }
-
     freeaddrinfo(save);
+}
+/*
+ wchar_t ipstringbuffer[46];
+
+this->socketaddr_ip = (LPSOCKADDR) dnsResults->ai_addr;
+// The buffer length is changed by each call to WSAAddresstoString
+// So we need to set it for each iteration through the loop for safety
+DWORD ipbufferlength = 46;
+int iRetval = WSAAddressToString(socketaddr_ip, (DWORD) dnsResults->ai_addrlen, NULL,
+                             ipstringbuffer, &ipbufferlength);
+if (iRetval)
+    printf("WSAAddressToString failed with %u\n", WSAGetLastError() );
+else
+    printf("\tIPv6 address %s\n", ipstringbuffer);
+*/
+
+void Socket::createSocket(struct addrinfo* dnsResults){
+    if((clientSocket = socket(dnsResults->ai_family, SOCK_STREAM, 0)) == INVALID_SOCKET){
+        qDebug() << "ERROR: No se pudo crear el socket";
+        error = -1;
+    }
+
+    qDebug() << "Socket creado correctamente";
 }
 
 void Socket::connect(){
-    error = ::connect(clientSocket, (struct sockaddr*)&server, sizeof(server));
+    error = ::connect(clientSocket, dnsResults->ai_addr, dnsResults->ai_addrlen);
     if(error == SOCKET_ERROR){
-        qDebug() << "Error de resolucion DNS";
+        qDebug() << "Error de conexion";
         closesocket(clientSocket);
     }
     else{
         qDebug() << "Conexion exitosa!!!";
     }
 }
-
 
 void Socket::sendInitialConectionPackage(){
     QString package = "0";

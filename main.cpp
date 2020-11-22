@@ -10,9 +10,13 @@ ChessBoard* board;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    char serverName[50] = "ajedrez.elinfelix.xserver.fun";
+    char port[5] = "4994";
     Socket socket;
-    socket.connect();
+    socket.createSocket();
+    socket.doDnsResolution(serverName, port);
+    socket.createServerSocket();
+    //socket.connect();
 
     board = new ChessBoard();
     qDebug() << "1" <<board;

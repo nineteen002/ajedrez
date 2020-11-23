@@ -38,13 +38,10 @@ void Loby::on_pushButton_clicked()
     }
     else {
         QMessageBox *alert = new QMessageBox();
-        alert->setText("Error en la conexion");
+        alert->setText("Error en la conexión");
         alert->show();
     }
-
     //try sending
-
-
 }
 
 void Loby::closeConnection(){

@@ -2,6 +2,7 @@
 #define PACKAGES_H
 
 #include <QString>
+#include <QDebug>
 
 class Packages
 {

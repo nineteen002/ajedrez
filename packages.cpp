@@ -5,8 +5,10 @@
 Packages::Packages(int type, QString text)
 {
     if (type == 0){
-        std::string packag = std::to_string(type) + std::to_string(text.toStdString().length()) + text.toStdString();
+        std::string packag = std::to_string(type) + "." + std::to_string(text.toStdString().length()) + "." + text.toStdString();
+
         strcpy(packMsm, packag.c_str());
+        qDebug() << "Tamaño de la cadena" <<strlen(packMsm) << "cadena: "<< packMsm;
     }
 }
 

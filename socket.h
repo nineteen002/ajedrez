@@ -16,6 +16,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QSocketNotifier>
 
 #define NS_INADDRSZ  4
 #define NS_IN6ADDRSZ 16
@@ -28,25 +29,30 @@ public:
     explicit Socket(QObject *parent = nullptr);
 
     int error;
-    bool isIpv4, isIpv6;
-    void createSocket(struct addrinfo*);
+    QSocketNotifier* watcher;
 
     void startConnectionWithServer(char* serverName, char* port);
-    void doDnsResolution(char* serverName, char* port);
-    void createServerSocket();
+    void createSocket(struct addrinfo*);
+    void connectSocket();
+    void makeNoBlocking();
+    void sendData(char*);
 
-    void connect();
     void sendInitialConectionPackage();
 
     int inet_pton(int af, const char *src, char *dst);
     int inet_pton4(const char *src, char *dst);
     int inet_pton6(const char *src, char *dst);
 
-signals:
+private slots:
+    int readFromServer(int);
+
 private:
-    SOCKET clientSocket;
+    SOCKET socketConnection;
     struct addrinfo *dnsResults;
     struct sockaddr *server;
+
+    void doDnsResolution(char* serverName, char* port);
+    void createServerSocket();
 
 };
 

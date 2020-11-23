@@ -1,4 +1,5 @@
 #include "socket.h"
+#include <QDebug>
 
 Socket::Socket(QObject *parent) : QObject(parent)
 {
@@ -169,6 +170,7 @@ int Socket::inet_pton6(const char *src, char *dst)
 void Socket::startConnectionWithServer(char* serverName, char* port){
     this->doDnsResolution(serverName, port);
     this->createServerSocket();
+    this->makeNoBlocking();
 }
 
 void Socket::doDnsResolution(char* serverName, char* port){
@@ -200,7 +202,7 @@ void Socket::createServerSocket(){
             qDebug() << "IPv6";
             createSocket(dnsResults);
         }
-        connect();
+        connectSocket();
     }
     freeaddrinfo(save);
 }
@@ -220,29 +222,55 @@ else
 */
 
 void Socket::createSocket(struct addrinfo* dnsResults){
-    if((clientSocket = socket(dnsResults->ai_family, SOCK_STREAM, 0)) == INVALID_SOCKET){
+    if((socketConnection = socket(dnsResults->ai_family, SOCK_STREAM, 0)) == INVALID_SOCKET){
         qDebug() << "ERROR: No se pudo crear el socket";
         error = -1;
     }
-
     qDebug() << "Socket creado correctamente";
 }
 
-void Socket::connect(){
-    error = ::connect(clientSocket, dnsResults->ai_addr, dnsResults->ai_addrlen);
+void Socket::connectSocket(){
+    error = ::connect(socketConnection, dnsResults->ai_addr, dnsResults->ai_addrlen);
     if(error == SOCKET_ERROR){
         qDebug() << "Error de conexion";
-        closesocket(clientSocket);
+        closesocket(socketConnection);
     }
     else{
         qDebug() << "Conexion exitosa!!!";
     }
 }
 
-void Socket::sendInitialConectionPackage(){
-    QString package = "0";
+void Socket::makeNoBlocking(){
+    watcher = new QSocketNotifier(socketConnection, QSocketNotifier::Read);
+    connect(watcher, SIGNAL(activated(int)),this, SLOT(readFromServer(int)));
+}
 
-    QByteArray bytes("hello", 1);
-    int length = bytes.size(); //Number of bytes
-    qDebug() << "Bytes: " << bytes <<" Length is:" << length;
+int Socket::readFromServer(int socketConnection){
+    char buffer[1024];
+    memset((char*)&buffer,0, sizeof(buffer));
+    bool dataRcv = false;
+    error = ::recv(socketConnection, buffer, sizeof(buffer), 0);
+    if(error < 0) {
+        //qDebug()  << "ERROR: Conexion cerrada por un error" << socketConnection << endl;
+        //::close(socketConnection);
+        //delete(watcher);
+        return -1;
+    } else if(error > 0) {
+        qDebug() << "Data recieved " << buffer;
+        dataRcv = true;
+    } else if(error == 0) {
+        qDebug()  << "Se cerro la conexion" << socketConnection << endl;
+        ::close(socketConnection);
+        delete(watcher);
+    }
+
+    memset((char*)&buffer,0, sizeof(buffer));
+    return -1;
+}
+
+void Socket::sendData(char* buffer){
+    //TRY SENDING DATA
+    qDebug() << "Sending data";
+    qDebug() << buffer << endl;
+    send(socketConnection, buffer, int(strlen(buffer)),0);
 }

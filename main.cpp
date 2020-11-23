@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
     char port[5] = "4994";
     Socket socket;
     socket.startConnectionWithServer(serverName, port);
+    //try sending
+    char buffer[1024];
+    strcpy(buffer,"I AM THE KING OF THE WORLD");
+    socket.sendData(buffer);
 
     board = new ChessBoard();
     qDebug() << "1" <<board;

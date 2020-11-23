@@ -2,13 +2,16 @@
 #include "boardblock.h"
 
 #include <QDebug>
+#include <QWidget>
+#include <QtWidgets>
+#include <QLineEdit>
 
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,1400,900);    //Window size not sure yet
+    scene->setSceneRect(0,0,1280,720);    //Window size not sure yet
 
     //Window properties
-    setFixedSize(1400,900); //Size of window can NOT change
+    setFixedSize(1280,720); //Size of window can NOT change
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setScene(scene);
@@ -21,10 +24,19 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
 
     selectedPiece = nullptr;
     this->isGameOver = false;
+    QPushButton *send = new QPushButton(this);
+    send->setText(tr("Enviar"));
+    send->move(1100,690);
+    QLineEdit *message = new QLineEdit(this);
+    message->move(800,690);
+    message->setMinimumSize(280,10);
+    QTextEdit *chat = new QTextEdit(this);
+    chat->move(800, 100);
+    chat->setMinimumSize(375, 570);
 }
 
 void ChessBoard::start(){
-    drawBoard(width()/2-650,50); //Draws chessboard squares
+    drawBoard(width()/2-630,0); //Draws chessboard squares
     //Setup pieces
     setupBlack();
     setupWhite();
@@ -35,6 +47,8 @@ void ChessBoard::start(){
     //blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
     //blocks[1][1]->getChessPiece()->move();//try to move pawn
 }
+
+
 
 void ChessBoard::gameOver(ChessPiece* king){
     QGraphicsTextItem* gameOver = new QGraphicsTextItem();
@@ -78,6 +92,11 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
             this->addToWindow(block); //Add it to window
         }
     }
+}
+
+void ChessBoard::chat()
+{
+
 }
 
 void ChessBoard::setupWhite(){//sets up black chess pieces

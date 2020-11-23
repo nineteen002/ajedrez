@@ -3,6 +3,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QMainWindow>
 
 #include "chesspiece.h"
 #include "boardblock.h"
@@ -16,8 +17,7 @@
 class ChessBoard : public QGraphicsView{ //Clase para el tablero
     Q_OBJECT
     private:
-
-        int const _size = 100;
+        int const _size = 90;
         bool _turn;
 
         QGraphicsScene* scene;
@@ -38,6 +38,7 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
        //drawing
         void drawBoard(int x, int y);
 
+        void chat();
         //setup of board
         void setupBoard();
         void setupWhite();

@@ -6,7 +6,7 @@
 extern ChessBoard* board;
 BoardBlock::BoardBlock(QGraphicsItem *parent): QGraphicsRectItem(parent) {
     //make square block
-    setRect(0,0,100,100);
+    setRect(0,0,80,80);
     brush.setStyle(Qt::SolidPattern);//bushstyle
     setZValue(-1);
 
@@ -150,7 +150,7 @@ void BoardBlock::setChessPiece(ChessPiece* piece){
     }
     else{
         //qDebug() << x()+50- piece->pixmap().width()/2 <<  y()+50-piece->pixmap().width()/2;
-        piece->setPos(x()+50- piece->pixmap().width()/2  , y()+50-piece->pixmap().width()/2);
+        piece->setPos(x()+40- piece->pixmap().width()/2  , y()+40-piece->pixmap().width()/2);
         piece->setCurrentBlock(this);
         hasChessPiece = true;
         this->piece = piece;

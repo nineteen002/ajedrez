@@ -248,7 +248,6 @@ void Socket::makeNoBlocking(){
 int Socket::readFromServer(int socketConnection){
     char buffer[1024];
     memset((char*)&buffer,0, sizeof(buffer));
-    bool dataRcv = false;
     error = ::recv(socketConnection, buffer, sizeof(buffer), 0);
     if(error < 0) {
         //qDebug()  << "ERROR: Conexion cerrada por un error" << socketConnection << endl;
@@ -257,7 +256,6 @@ int Socket::readFromServer(int socketConnection){
         return -1;
     } else if(error > 0) {
         qDebug() << "Data recieved " << buffer;
-        dataRcv = true;
     } else if(error == 0) {
         qDebug()  << "Se cerro la conexion" << socketConnection << endl;
         ::close(socketConnection);

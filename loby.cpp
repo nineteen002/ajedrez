@@ -28,6 +28,16 @@ void Loby::on_pushButton_2_clicked()
 
 void Loby::on_pushButton_clicked()
 {
+
+    char serverName[50] = "ajedrez.elinfelix.xserver.fun";
+    char port[5] = "4994";
+    Socket socket;
+    socket.startConnectionWithServer(serverName, port);
+    //try sending
+    char buffer[1024];
+    strcpy(buffer,"I AM THE KING OF THE WORLD");
+    socket.sendData(buffer);
+
     this->hide();
     board = new ChessBoard();
     board->show();

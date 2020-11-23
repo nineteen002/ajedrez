@@ -32,9 +32,11 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     QLineEdit *message = new QLineEdit(this);
     message->move(800,690);
     message->setMinimumSize(280,10);
+    message->setMaxLength(100);
     QTextEdit *chat = new QTextEdit(this);
     chat->move(800, 100);
     chat->setMinimumSize(375, 570);
+
 }
 
 void ChessBoard::start(){

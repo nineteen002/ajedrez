@@ -15,7 +15,6 @@ class Loby : public QDialog
 public:
     explicit Loby(QWidget *parent = nullptr);
     ~Loby();
-    void thisShowAgain();
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_clicked();

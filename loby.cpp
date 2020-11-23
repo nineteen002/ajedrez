@@ -16,11 +16,6 @@ Loby::~Loby()
     delete ui;
 }
 
-void Loby::thisShowAgain()
-{
-    this->show();
-}
-
 void Loby::on_pushButton_2_clicked()
 {
     this->close();

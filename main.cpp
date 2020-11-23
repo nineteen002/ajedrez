@@ -3,24 +3,28 @@
 #include <QTcpSocket>
 #include <QObject>
 
-#include "chessboard.h"
+//#include "chessboard.h"
 #include "socket.h"
+#include "loby.h"
 
-ChessBoard* board;
+Loby* loby;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    char serverName[50] = "ajedrez.elinfelix.xserver.fun";
-    if(serverName[strlen(serverName) - 1] == '\n') serverName[strlen(serverName) -1] = '\0';
+//    char serverName[50] = "ajedrez.elinfelix.xserver.fun";
+//    if(serverName[strlen(serverName) - 1] == '\n') serverName[strlen(serverName) -1] = '\0';
 
-    char port[5] = "4994";
-    Socket socket;
-    socket.startConnectionWithServer(serverName, port);
+//    char port[5] = "4994";
+//    Socket socket;
+//    socket.startConnectionWithServer(serverName, port);
 
-    board = new ChessBoard();
-    qDebug() << "1" <<board;
-    board->show();
-    board->start();
+//    board = new ChessBoard();
+//    qDebug() << "1" <<board;
+//    board->show();
+//    board->start();
+    loby=new Loby();
+    loby->show();
+    loby->show();
     return a.exec();
     //MainWindow w;
     //w.show();

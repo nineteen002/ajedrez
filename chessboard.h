@@ -38,6 +38,7 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
        //drawing
         void drawBoard(int x, int y);
 
+
         void chat();
         //setup of board
         void setupBoard();
@@ -61,6 +62,8 @@ class ChessBoard : public QGraphicsView{ //Clase para el tablero
         ChessPiece* kings[2];
         bool isGameOver;
         ChessPiece* selectedPiece;
+protected:
+        void closeEvent(QCloseEvent *);
 };
 
 #endif // CHESSBOARD_H

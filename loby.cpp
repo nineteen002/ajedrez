@@ -2,7 +2,8 @@
 #include "ui_loby.h"
 #include "chessboard.h"
 
-extern ChessBoard* board;
+ChessBoard* board;
+
 Loby::Loby(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Loby)
@@ -15,6 +16,11 @@ Loby::~Loby()
     delete ui;
 }
 
+void Loby::thisShowAgain()
+{
+    this->show();
+}
+
 void Loby::on_pushButton_2_clicked()
 {
     this->close();
@@ -22,7 +28,9 @@ void Loby::on_pushButton_2_clicked()
 
 void Loby::on_pushButton_clicked()
 {
+    this->hide();
     board = new ChessBoard();
     board->show();
     board->start();
+
 }

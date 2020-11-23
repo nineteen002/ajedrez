@@ -5,13 +5,15 @@
 #include <QWidget>
 #include <QtWidgets>
 #include <QLineEdit>
+#include "loby.h"
 
+extern Loby *loby;
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,1280,720);    //Window size not sure yet
+    scene->setSceneRect(0,0,1280,730);    //Window size not sure yet
 
     //Window properties
-    setFixedSize(1280,720); //Size of window can NOT change
+    setFixedSize(1280,730); //Size of window can NOT change
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setScene(scene);
@@ -36,7 +38,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
 }
 
 void ChessBoard::start(){
-    drawBoard(width()/2-630,0); //Draws chessboard squares
+    drawBoard(width()/2-630,8); //Draws chessboard squares
     //Setup pieces
     setupBlack();
     setupWhite();
@@ -67,6 +69,12 @@ void ChessBoard::gameOver(ChessPiece* king){
     addToWindow(gameOver);
 
     //ChessBoard::close();
+}
+
+void ChessBoard::closeEvent(QCloseEvent *)
+{
+    loby->show();
+
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates

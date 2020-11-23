@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "socket.h"
 #include "packages.h"
+#include "QMessageBox"
 
 namespace Ui {
 class Loby;

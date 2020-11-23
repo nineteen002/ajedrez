@@ -167,13 +167,17 @@ int Socket::inet_pton6(const char *src, char *dst)
     return 1;
 }
 
-void Socket::startConnectionWithServer(char* serverName, char* port){
-    this->doDnsResolution(serverName, port);
-    this->createServerSocket();
-    this->makeNoBlocking();
+bool Socket::startConnectionWithServer(char* serverName, char* port){
+    if (this->doDnsResolution(serverName, port) == true){
+        if (this->createServerSocket() == true){
+            this->makeNoBlocking();
+            return true;
+        }
+    }
+    return false;
 }
 
-void Socket::doDnsResolution(char* serverName, char* port){
+bool Socket::doDnsResolution(char* serverName, char* port){
     struct addrinfo hints;
 
     memset(&hints, 0, sizeof(hints));
@@ -186,11 +190,13 @@ void Socket::doDnsResolution(char* serverName, char* port){
     error = getaddrinfo(serverName, port, &hints, &dnsResults);
     if(error != 0){
         qDebug() << "Error de resolucion DNS";
+        return false;
     }
     qDebug() << "Resolucion DNS correcta!!";
+    return true;
 }
 
-void Socket::createServerSocket(){
+bool Socket::createServerSocket(){
     struct addrinfo *save= dnsResults;
     for(save = dnsResults; dnsResults != nullptr; dnsResults = dnsResults->ai_next){
         //IPV4
@@ -202,9 +208,12 @@ void Socket::createServerSocket(){
             qDebug() << "IPv6";
             createSocket(dnsResults);
         }
-        connectSocket();
+        if (connectSocket() == false){
+            return false;
+        }
     }
     freeaddrinfo(save);
+    return true;
 }
 /*
  wchar_t ipstringbuffer[46];
@@ -229,14 +238,16 @@ void Socket::createSocket(struct addrinfo* dnsResults){
     qDebug() << "Socket creado correctamente";
 }
 
-void Socket::connectSocket(){
+bool Socket::connectSocket(){
     error = ::connect(socketConnection, dnsResults->ai_addr, dnsResults->ai_addrlen);
     if(error == SOCKET_ERROR){
         qDebug() << "Error de conexion";
         closesocket(socketConnection);
+        return false;
     }
     else{
         qDebug() << "Conexion exitosa!!!";
+        return true;
     }
 }
 

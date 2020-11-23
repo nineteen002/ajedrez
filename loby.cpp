@@ -29,17 +29,21 @@ void Loby::on_pushButton_clicked()
     char serverName[50] = "ajedrez.elinfelix.xserver.fun";
     char port[5] = "4994";
     socket = new Socket();
-    socket->startConnectionWithServer(serverName, port);
+    if (socket->startConnectionWithServer(serverName, port) ==  true){
+        socket->sendData(packageLog->getPackMsm());
+        this->hide();
+        board = new ChessBoard();
+        board->show();
+        board->start();
+    }
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Error en la conexion");
+        alert->show();
+    }
 
     //try sending
-    char buffer[1024];
-    strcpy(buffer,"I AM THE KING OF THE WORLD");
-    socket->sendData(packageLog->getPackMsm());
 
-    this->hide();
-    board = new ChessBoard();
-    board->show();
-    board->start();
 
 }
 

@@ -31,9 +31,9 @@ public:
     int error;
     QSocketNotifier* watcher;
 
-    void startConnectionWithServer(char* serverName, char* port);
+    bool startConnectionWithServer(char* serverName, char* port);
     void createSocket(struct addrinfo*);
-    void connectSocket();
+    bool connectSocket();
     void makeNoBlocking();
     void sendData(char*);
     void closeSocket();
@@ -52,8 +52,8 @@ private:
     struct addrinfo *dnsResults;
     struct sockaddr *server;
 
-    void doDnsResolution(char* serverName, char* port);
-    void createServerSocket();
+    bool doDnsResolution(char* serverName, char* port);
+    bool createServerSocket();
 
 };
 

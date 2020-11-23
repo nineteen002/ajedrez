@@ -36,7 +36,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     QTextEdit *chat = new QTextEdit(this);
     chat->move(800, 100);
     chat->setMinimumSize(375, 570);
-
+    chat->setReadOnly(true);
 }
 
 void ChessBoard::start(){

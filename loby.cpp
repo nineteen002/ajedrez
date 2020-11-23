@@ -9,6 +9,7 @@ Loby::Loby(QWidget *parent) :
     ui(new Ui::Loby)
 {
     ui->setupUi(this);
+    packageLog = nullptr;
 }
 
 Loby::~Loby()
@@ -23,17 +24,17 @@ void Loby::on_pushButton_2_clicked()
 
 void Loby::on_pushButton_clicked()
 {
-
+    nameUser = ui->userName->text();
+    packageLog = new Packages(0, nameUser);
     char serverName[50] = "ajedrez.elinfelix.xserver.fun";
     char port[5] = "4994";
-
     socket = new Socket();
     socket->startConnectionWithServer(serverName, port);
 
     //try sending
     char buffer[1024];
     strcpy(buffer,"I AM THE KING OF THE WORLD");
-    socket->sendData(buffer);
+    socket->sendData(packageLog->getPackMsm());
 
     this->hide();
     board = new ChessBoard();

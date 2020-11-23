@@ -18,6 +18,7 @@ SOURCES += \
     knight.cpp \
     loby.cpp \
     main.cpp \
+    packages.cpp \
     pawn.cpp \
     queen.cpp \
     rook.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     king.h \
     knight.h \
     loby.h \
+    packages.h \
     pawn.h \
     queen.h \
     rook.h \

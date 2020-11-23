@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "socket.h"
+#include "packages.h"
 
 namespace Ui {
 class Loby;
@@ -21,10 +22,11 @@ public:
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_clicked();
-
 private:
     Ui::Loby *ui;
     Socket* socket;
+    QString nameUser;
+    Packages *packageLog;
 };
 
 #endif // LOBY_H

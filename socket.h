@@ -36,6 +36,7 @@ public:
     void connectSocket();
     void makeNoBlocking();
     void sendData(char*);
+    void closeSocket();
 
     void sendInitialConectionPackage();
 

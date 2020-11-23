@@ -272,3 +272,8 @@ void Socket::sendData(char* buffer){
     qDebug() << buffer << endl;
     send(socketConnection, buffer, int(strlen(buffer)),0);
 }
+
+void Socket::closeSocket()
+{
+    ::close(socketConnection);
+}

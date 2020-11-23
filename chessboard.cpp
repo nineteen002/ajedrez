@@ -76,6 +76,7 @@ void ChessBoard::gameOver(ChessPiece* king){
 void ChessBoard::closeEvent(QCloseEvent *)
 {
     loby->show();
+    loby->closeConnection();
 
 }
 

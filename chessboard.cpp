@@ -13,7 +13,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene->setSceneRect(0,0,1280,730);    //Window size not sure yet
 
     //Window properties
-    setFixedSize(1280,730); //Size of window can NOT change
+    //setFixedSize(1280,730); //Size of window can NOT change
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setScene(scene);

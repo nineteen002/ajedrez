@@ -178,20 +178,22 @@ void ChessBoard::setupBlack(){ //sets up black chess pieces
 }
 
 void ChessBoard::setupBoard(){ //Puts pieces in the board
+    int b = 0;
+    int w = 0;
     for(int i = 0; i < 8; i++){
         for(int j = 0; j < 8; j++){ //Go though board
 
             BoardBlock* block = blocks[i][j];
 
             if(i < 2){ //first two rows add black chess piece
-                static int b = 0;
+                //BUG: This is a bug static int b = 0;
                 block->setChessPiece(black[b]); //add piece to block
                 addToWindow(black[b]); //add piece to window
                 b++;
             }
 
             if(i > 5){ //last two rows add black chess piece
-                static int w = 0;
+                //BUG: static int w = 0;
                 block->setChessPiece(white[w]);
                 addToWindow(white[w]);
                 w++;

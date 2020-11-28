@@ -13,6 +13,5 @@ int main(int argc, char *argv[])
   
     loby=new Loby();
     loby->show();
-    loby->show();
     return a.exec();
 }

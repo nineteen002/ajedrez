@@ -6,7 +6,7 @@ Socket::Socket(QObject *parent) : QObject(parent)
     WSADATA wsaData;
 
     if(WSAStartup(MAKEWORD(2,2),&wsaData) != 0){
-        qDebug() << "Error de inicializacion" << endl;
+        qDebug() << "Error de inicializacion" ;
         this->error = -1;
     }
 }
@@ -215,20 +215,7 @@ bool Socket::createServerSocket(){
     freeaddrinfo(save);
     return true;
 }
-/*
- wchar_t ipstringbuffer[46];
 
-this->socketaddr_ip = (LPSOCKADDR) dnsResults->ai_addr;
-// The buffer length is changed by each call to WSAAddresstoString
-// So we need to set it for each iteration through the loop for safety
-DWORD ipbufferlength = 46;
-int iRetval = WSAAddressToString(socketaddr_ip, (DWORD) dnsResults->ai_addrlen, NULL,
-                             ipstringbuffer, &ipbufferlength);
-if (iRetval)
-    printf("WSAAddressToString failed with %u\n", WSAGetLastError() );
-else
-    printf("\tIPv6 address %s\n", ipstringbuffer);
-*/
 
 void Socket::createSocket(struct addrinfo* dnsResults){
     if((socketConnection = socket(dnsResults->ai_family, SOCK_STREAM, 0)) == INVALID_SOCKET){
@@ -268,7 +255,7 @@ int Socket::readFromServer(int socketConnection){
     } else if(error > 0) {
         qDebug() << "Data recieved " << buffer;
     } else if(error == 0) {
-        qDebug()  << "Se cerro la conexion" << socketConnection << endl;
+        qDebug()  << "Se cerro la conexion" << socketConnection ;
         ::close(socketConnection);
         delete(watcher);
     }
@@ -280,11 +267,13 @@ int Socket::readFromServer(int socketConnection){
 void Socket::sendData(char* buffer){
     //TRY SENDING DATA
     qDebug() << "Sending data";
-    qDebug() << buffer << endl;
+    qDebug() << buffer ;
     send(socketConnection, buffer, int(strlen(buffer)),0);
 }
 
 void Socket::closeSocket()
 {
-    ::close(socketConnection);
+    //::close(socketConnection);
+    closesocket(socketConnection);
+    delete watcher;
 }

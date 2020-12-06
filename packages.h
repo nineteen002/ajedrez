@@ -10,6 +10,7 @@ class Packages
 {
 public:
     Packages(int type, QString text);
+    Packages(int type, int plase_pos, int final_pos);
     char *getPackMsm() const;
     void setPackMsm(char *value);
 

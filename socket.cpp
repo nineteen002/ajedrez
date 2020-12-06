@@ -184,11 +184,9 @@ void Socket::processRed(char *buffer)
         }
         std::cout << opponent_name;
     }
-    else if (int(buffer[0]) == 3){
-
-    }
     else if (int(buffer[0]) == 4){
-
+        int select_pos = buffer[1];
+        int mv_pos = buffer[2];
     }
     else if (int(buffer[0]) == 5){
 

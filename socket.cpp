@@ -298,7 +298,6 @@ void Socket::sendData(char* buffer){
 
 void Socket::closeSocket()
 {
-    ::close(socketConnection);
+    //::close(socketConnection);
     closesocket(socketConnection);
-    delete watcher;
 }

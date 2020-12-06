@@ -75,9 +75,8 @@ void ChessBoard::gameOver(ChessPiece* king){
 
 void ChessBoard::closeEvent(QCloseEvent *)
 {
-    loby->show();
     loby->closeConnection();
-
+    loby->show();
 }
 
 void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates

@@ -34,7 +34,7 @@ void Loby::on_pushButton_clicked()
         this->hide();
         board = new ChessBoard();
         board->show();
-        board->start();
+        //board->start();
     }
     else {
         QMessageBox *alert = new QMessageBox();
@@ -45,5 +45,5 @@ void Loby::on_pushButton_clicked()
 }
 
 void Loby::closeConnection(){
-    //socket->closeSocket();
+    socket->closeSocket();
 }

@@ -12,6 +12,15 @@ Packages::Packages(int type, QString text)
         strcpy(packMsm, packag.c_str());
         qDebug() << "Tamaño de la cadena" <<strlen(packMsm) << "cadena: "<< packMsm;
     }
+    else if (type == 1){
+
+    }
+    else if (type == 2){
+
+    }
+    else if (type == 3){
+
+    }
 }
 
 char *Packages::getPackMsm() const

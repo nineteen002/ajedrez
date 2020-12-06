@@ -3,6 +3,8 @@
 
 #include <QString>
 #include <QDebug>
+#define p_conect 0
+#define p_play 2
 
 class Packages
 {

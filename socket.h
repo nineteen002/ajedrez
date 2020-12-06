@@ -43,7 +43,7 @@ public:
     int inet_pton(int af, const char *src, char *dst);
     int inet_pton4(const char *src, char *dst);
     int inet_pton6(const char *src, char *dst);
-
+    void processRed(char *);
 private slots:
     int readFromServer(int);
 

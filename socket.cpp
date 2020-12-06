@@ -1,5 +1,6 @@
 #include "socket.h"
 #include <QDebug>
+#include <stdlib.h>
 
 Socket::Socket(QObject *parent) : QObject(parent)
 {
@@ -167,6 +168,28 @@ int Socket::inet_pton6(const char *src, char *dst)
     return 1;
 }
 
+void Socket::processRed(char *buffer)
+{
+
+    if (int(buffer[0]) == 1){
+        int roomNumber = int(buffer[1]);
+        int team = int(buffer[2]);
+        qDebug() << "room number: "<< roomNumber << "team: "<< team ;
+    }
+    else if (int(buffer[0]) == 2){
+
+    }
+    else if (int(buffer[0]) == 3){
+
+    }
+    else if (int(buffer[0]) == 4){
+
+    }
+    else if (int(buffer[0]) == 5){
+
+    }
+}
+
 bool Socket::startConnectionWithServer(char* serverName, char* port){
     if (this->doDnsResolution(serverName, port) == true){
         if (this->createServerSocket() == true){
@@ -245,15 +268,16 @@ void Socket::makeNoBlocking(){
 
 int Socket::readFromServer(int socketConnection){
     char buffer[1024];
-    memset((char*)&buffer,0, sizeof(buffer));
-    error = ::recv(socketConnection, buffer, sizeof(buffer), 0);
+    memset((char*)&buffer,0, sizeof(buffer)); // clean buffer
+    error = ::recv(socketConnection, buffer, sizeof(buffer), 0); //negative= errir conectio 0= cerro positive=read bytes
     if(error < 0) {
         //qDebug()  << "ERROR: Conexion cerrada por un error" << socketConnection << endl;
         //::close(socketConnection);
         //delete(watcher);
         return -1;
     } else if(error > 0) {
-        qDebug() << "Data recieved " << buffer;
+        qDebug() << "Data recieved " << buffer << "Bytes resividos: " << error;
+        processRed(buffer);
     } else if(error == 0) {
         qDebug()  << "Se cerro la conexion" << socketConnection ;
         ::close(socketConnection);
@@ -261,6 +285,7 @@ int Socket::readFromServer(int socketConnection){
     }
 
     memset((char*)&buffer,0, sizeof(buffer));
+
     return -1;
 }
 
@@ -273,7 +298,7 @@ void Socket::sendData(char* buffer){
 
 void Socket::closeSocket()
 {
-    //::close(socketConnection);
+    ::close(socketConnection);
     closesocket(socketConnection);
     delete watcher;
 }

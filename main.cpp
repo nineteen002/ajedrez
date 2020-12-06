@@ -10,7 +10,6 @@ Loby* loby;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-  
     loby=new Loby();
     loby->show();
     return a.exec();

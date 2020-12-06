@@ -17,7 +17,7 @@ class Loby : public QDialog
 public:
     explicit Loby(QWidget *parent = nullptr);
     ~Loby();
-
+    Socket* socket;
     void closeConnection();
 
 private slots:
@@ -25,7 +25,7 @@ private slots:
     void on_pushButton_clicked();
 private:
     Ui::Loby *ui;
-    Socket* socket;
+
     QString nameUser;
     Packages *packageLog;
 };

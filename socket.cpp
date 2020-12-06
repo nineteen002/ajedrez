@@ -1,6 +1,7 @@
 #include "socket.h"
 #include <QDebug>
 #include <stdlib.h>
+#include <iostream>
 
 Socket::Socket(QObject *parent) : QObject(parent)
 {
@@ -170,14 +171,18 @@ int Socket::inet_pton6(const char *src, char *dst)
 
 void Socket::processRed(char *buffer)
 {
-
     if (int(buffer[0]) == 1){
         int roomNumber = int(buffer[1]);
         int team = int(buffer[2]);
         qDebug() << "room number: "<< roomNumber << "team: "<< team ;
     }
     else if (int(buffer[0]) == 2){
-
+        char opponent_name[256];
+        int _long = int(buffer[1]);
+        for  (int i = 2; i <_long; i++){
+            opponent_name[i-2] = buffer[i];
+        }
+        std::cout << opponent_name;
     }
     else if (int(buffer[0]) == 3){
 
@@ -276,7 +281,7 @@ int Socket::readFromServer(int socketConnection){
         //delete(watcher);
         return -1;
     } else if(error > 0) {
-        qDebug() << "Data recieved " << buffer << "Bytes resividos: " << error;
+        qDebug() << "Data recieved:" << buffer << "Bytes resividos: " << error;
         processRed(buffer);
     } else if(error == 0) {
         qDebug()  << "Se cerro la conexion" << socketConnection ;

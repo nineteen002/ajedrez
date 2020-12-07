@@ -3,11 +3,6 @@
 #include <stdlib.h>
 #include <iostream>
 
-int current_team;
-char name_enemy[256];
-int select_pos;
-int mv_pos;
-
 Socket::Socket(QObject *parent) : QObject(parent)
 {
     WSADATA wsaData;

@@ -27,7 +27,6 @@ class Socket : public QObject
     Q_OBJECT
 public:
     explicit Socket(QObject *parent = nullptr);
-
     int error;
     QSocketNotifier* watcher;
 
@@ -44,6 +43,11 @@ public:
     int inet_pton4(const char *src, char *dst);
     int inet_pton6(const char *src, char *dst);
     void processRed(char *);
+
+    int current_team;
+    char name_enemy[256];
+    int select_pos;
+    int mv_pos;
 private slots:
     int readFromServer(int);
 
@@ -51,9 +55,9 @@ private:
     SOCKET socketConnection;
     struct addrinfo *dnsResults;
     struct sockaddr *server;
-
     bool doDnsResolution(char* serverName, char* port);
     bool createServerSocket();
+
 
 };
 

@@ -10,13 +10,13 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include <winsock2.h>
-#include <winsock.h>
-#include <ws2tcpip.h>
-
 #include <QObject>
 #include <QTcpSocket>
 #include <QSocketNotifier>
+
+#include <winsock2.h>
+#include <winsock.h>
+#include <ws2tcpip.h>
 
 #define NS_INADDRSZ  4
 #define NS_IN6ADDRSZ 16

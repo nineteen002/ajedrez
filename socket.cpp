@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <iostream>
 
+int current_team;
+char name_enemy[256];
+int select_pos;
+int mv_pos;
+
 Socket::Socket(QObject *parent) : QObject(parent)
 {
     WSADATA wsaData;
@@ -173,23 +178,19 @@ void Socket::processRed(char *buffer)
 {
     if (int(buffer[0]) == 1){
         int roomNumber = int(buffer[1]);
-        int team = int(buffer[2]);
-        qDebug() << "room number: "<< roomNumber << "team: "<< team ;
+        current_team = int(buffer[2]);
+        qDebug() << "room number: "<< roomNumber << "team: "<< current_team ;
     }
     else if (int(buffer[0]) == 2){
-        char opponent_name[256];
         int _long = int(buffer[1]);
         for  (int i = 2; i <_long; i++){
-            opponent_name[i-2] = buffer[i];
+            name_enemy[i-2] = buffer[i];
         }
-        std::cout << opponent_name;
+        qDebug() << name_enemy;
     }
     else if (int(buffer[0]) == 4){
-        int select_pos = buffer[1];
-        int mv_pos = buffer[2];
-    }
-    else if (int(buffer[0]) == 5){
-
+        select_pos = buffer[1];
+        mv_pos = buffer[2];
     }
 }
 
@@ -241,7 +242,6 @@ bool Socket::createServerSocket(){
     freeaddrinfo(save);
     return true;
 }
-
 
 void Socket::createSocket(struct addrinfo* dnsResults){
     if((socketConnection = socket(dnsResults->ai_family, SOCK_STREAM, 0)) == INVALID_SOCKET){

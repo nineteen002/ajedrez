@@ -2,9 +2,9 @@
 #define LOBY_H
 
 #include <QDialog>
-#include "socket.h"
 #include "packages.h"
 #include "QMessageBox"
+#include "socket.h"
 
 namespace Ui {
 class Loby;

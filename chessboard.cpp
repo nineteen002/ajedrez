@@ -6,6 +6,7 @@
 #include <QtWidgets>
 #include <QLineEdit>
 #include "loby.h"
+#include "socket.h"
 
 extern Loby *loby;
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
@@ -13,7 +14,7 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene->setSceneRect(0,0,1280,730);    //Window size not sure yet
 
     //Window properties
-    //setFixedSize(1280,730); //Size of window can NOT change
+    setFixedSize(1280,730); //Size of window can NOT change
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //No scroll bar
     setScene(scene);
@@ -185,14 +186,12 @@ void ChessBoard::setupBoard(){ //Puts pieces in the board
             BoardBlock* block = blocks[i][j];
 
             if(i < 2){ //first two rows add black chess piece
-                //BUG: This is a bug static int b = 0;
                 block->setChessPiece(black[b]); //add piece to block
                 addToWindow(black[b]); //add piece to window
                 b++;
             }
 
             if(i > 5){ //last two rows add black chess piece
-                //BUG: static int w = 0;
                 block->setChessPiece(white[w]);
                 addToWindow(white[w]);
                 w++;

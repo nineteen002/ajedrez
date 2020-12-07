@@ -6,7 +6,6 @@
 Socket::Socket(QObject *parent) : QObject(parent)
 {
     WSADATA wsaData;
-
     if(WSAStartup(MAKEWORD(2,2),&wsaData) != 0){
         qDebug() << "Error de inicializacion" ;
         this->error = -1;
@@ -29,24 +28,19 @@ int Socket::inet_pton(int af, const char *src, char *dst)
 int Socket::inet_pton4(const char *src, char *dst)
 {
     uint8_t tmp[NS_INADDRSZ], *tp;
-
     int saw_digit = 0;
     int octets = 0;
     *(tp = tmp) = 0;
-
     int ch;
     while ((ch = *src++) != '\0')
     {
         if (ch >= '0' && ch <= '9')
         {
             uint32_t n = *tp * 10 + (ch - '0');
-
             if (saw_digit && *tp == 0)
                 return 0;
-
             if (n > 255)
                 return 0;
-
             *tp = n;
             if (!saw_digit)
             {
@@ -67,9 +61,7 @@ int Socket::inet_pton4(const char *src, char *dst)
     }
     if (octets < 4)
         return 0;
-
     memcpy(dst, tmp, NS_INADDRSZ);
-
     return 1;
 }
 
@@ -77,18 +69,15 @@ int Socket::inet_pton6(const char *src, char *dst)
 {
     static const char xdigits[] = "0123456789abcdef";
     uint8_t tmp[NS_IN6ADDRSZ];
-
     uint8_t *tp = (uint8_t*) memset(tmp, '\0', NS_IN6ADDRSZ);
     uint8_t *endp = tp + NS_IN6ADDRSZ;
     uint8_t *colonp = NULL;
-
     /* Leading :: requires some special handling. */
     if (*src == ':')
     {
         if (*++src != ':')
             return 0;
     }
-
     const char *curtok = src;
     int saw_xdigit = 0;
     uint32_t val = 0;

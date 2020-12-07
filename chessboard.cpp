@@ -6,9 +6,9 @@
 #include <QtWidgets>
 #include <QLineEdit>
 #include "loby.h"
-#include "socket.h"
 
 extern Loby *loby;
+
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene = new QGraphicsScene();
     scene->setSceneRect(0,0,1280,730);    //Window size not sure yet

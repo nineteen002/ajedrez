@@ -109,3 +109,8 @@ FORMATO PAQUETE(S->C):
 	tipo paquete:8
 	tipo error: 0 (error trampa), 1 (error de desconexion)
 	cierre de conexion
+FORMATO PAQUETE (C->S)
+	tipo: 9
+	int quien_manda // 0 servidor,  1 enemigo. /* el 1 lo produce el cliente el servidor solo lo rebota o almenos asi lo pienso*/
+	int tamaño_mensaje
+	char* mensaje

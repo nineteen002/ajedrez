@@ -4,10 +4,11 @@
 #include <QDebug>
 #include <QWidget>
 #include <QtWidgets>
-#include <QLineEdit>
+
 #include "loby.h"
 
 extern Loby *loby;
+
 
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene = new QGraphicsScene();
@@ -27,33 +28,39 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
 
     selectedPiece = nullptr;
     this->isGameOver = false;
-    QPushButton *send = new QPushButton(this);
+    send = new QPushButton(this);
     send->setText(tr("Enviar"));
     send->move(1100,690);
-    QLineEdit *message = new QLineEdit(this);
+    message = new QLineEdit(this);
     message->move(800,690);
     message->setMinimumSize(280,10);
     message->setMaxLength(100);
-    QTextEdit *chat = new QTextEdit(this);
+    chat = new QTextEdit(this);
     chat->move(800, 100);
     chat->setMinimumSize(375, 570);
     chat->setReadOnly(true);
 }
 
+void ChessBoard::sendMSM()
+{
+    QPushButton *ptr = send;
+    //TODO: Terminar el chat
+
+}
+
 void ChessBoard::start(){
     drawBoard(width()/2-630,8); //Draws chessboard squares
+
     //Setup pieces
     setupBlack();
     setupWhite();
     //show pieces on the board
     setupBoard();
-    qDebug() << "DEAD KING" ;
-    qDebug() << "3" << this->blocks;
+    //qDebug() << "DEAD KING" ;
+    //qDebug() << "3" << this->blocks;
     //blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
     //blocks[1][1]->getChessPiece()->move();//try to move pawn
 }
-
-
 
 void ChessBoard::gameOver(ChessPiece* king){
     QGraphicsTextItem* gameOver = new QGraphicsTextItem();
@@ -72,6 +79,30 @@ void ChessBoard::gameOver(ChessPiece* king){
     addToWindow(gameOver);
 
     //ChessBoard::close();
+}
+
+void ChessBoard::sayTeam()
+{
+    //QGraphicsTextItem* yourTeam = new QGraphicsTextItem();
+//    yourTeam->setPos(900,50);
+//    yourTeam->setZValue(1);
+//    yourTeam->setDefaultTextColor(Qt::black);
+//    yourTeam->setFont(QFont("",30));
+    if (loby->socket->current_team == 1){
+        //yourTeam->setPlainText("Te tocan Blancas");
+        char how[256] = "Server:";
+        char msm[256] = "Te tocan Blancas";
+        this->chatMessage(how,msm);
+    }
+    else if (loby->socket->current_team == 0){
+        //yourTeam->setPlainText("");
+        char how[256] = "Server:";
+        char msm[256] = "Te tocan negras";
+        this->chatMessage(how,msm);
+    }
+    //addToWindow(yourTeam);
+
+
 }
 
 void ChessBoard::closeEvent(QCloseEvent *)
@@ -105,9 +136,10 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
     }
 }
 
-void ChessBoard::chat()
+void ChessBoard::chatMessage(char *how, char *message)
 {
-
+    QString mesage = strcat(how, message) ;
+    chat->append(mesage);
 }
 
 void ChessBoard::setupWhite(){//sets up black chess pieces

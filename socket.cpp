@@ -2,6 +2,9 @@
 #include <QDebug>
 #include <stdlib.h>
 #include <iostream>
+#include "chessboard.h"
+
+extern ChessBoard* board;
 
 Socket::Socket(QObject *parent) : QObject(parent)
 {
@@ -164,6 +167,7 @@ void Socket::processRed(char *buffer)
         int roomNumber = int(buffer[1]);
         current_team = int(buffer[2]);
         qDebug() << "room number: "<< roomNumber << "team: "<< current_team ;
+        board->sayTeam();
     }
     else if (int(buffer[0]) == 2){
         int _long = int(buffer[1]);
@@ -175,6 +179,24 @@ void Socket::processRed(char *buffer)
     else if (int(buffer[0]) == 4){
         select_pos = buffer[1];
         mv_pos = buffer[2];
+    }
+    else if (int(buffer[0]) == 9){
+
+        int quien = int(buffer[1]);
+        int _long = int(buffer[2]);
+        char *how = 0;
+        char msm[256];
+        for  (int i = 3; i <_long; i++){
+            msm[i-3] = buffer[i];
+        }
+        if (quien == 1){
+            how = name_enemy;
+        }
+        else if (quien == 0){
+
+            strcat(how,"Servidor: ");
+        }
+        board->chatMessage(how, msm);
     }
 }
 

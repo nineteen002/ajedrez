@@ -7,12 +7,20 @@
 Packages::Packages(int type, QString text)
 {
     packMsm = new char[256];
+    std::string txt = text.toStdString();
     if (type == 0){
-        std::string txt = text.toStdString();
         packMsm[0] = '0';
         packMsm[1] = text.length();
         for (int i = 2; i < (text.length()+2); i++ ){
             packMsm[i] = txt[i-2];
+        }
+    }
+    else if (type == 9){
+        packMsm[0] = 9;
+        packMsm[1] = 1;
+        packMsm[2] = text.length();
+        for (int i = 3; i < (text.length()+3); i++ ){
+            packMsm[i] = txt[i-3];
         }
     }
 }

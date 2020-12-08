@@ -36,6 +36,8 @@ private:
     QTextEdit *chat;
     QLineEdit *message;
     QPushButton *send;
+    QGraphicsTextItem* turnChange;
+
 private slots:
     void sendMSM();
 public:
@@ -61,6 +63,7 @@ public:
 
     void start();
     void gameOver(ChessPiece*);
+    void showTurn();
     void sayTeam();
     void enemyMove(int posa, int posf);
 

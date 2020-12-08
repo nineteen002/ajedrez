@@ -39,6 +39,10 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     chat->move(800, 100);
     chat->setMinimumSize(375, 570);
     chat->setReadOnly(true);
+
+    turnChange = new QGraphicsTextItem();
+    _turn = 1;
+    showTurn();
 }
 
 void ChessBoard::sendMSM()
@@ -60,10 +64,10 @@ void ChessBoard::start(){
 
 void ChessBoard::gameOver(ChessPiece* king){
     QGraphicsTextItem* gameOver = new QGraphicsTextItem();
-    gameOver->setPos(900,50);
+    gameOver->setPos(735,50);
     gameOver->setZValue(1);
     gameOver->setDefaultTextColor(Qt::red);
-    gameOver->setFont(QFont("",30));
+    gameOver->setFont(QFont("",20));
 
     if(king->getSide() == "Black"){
         gameOver->setPlainText("GAME OVER: White won!");
@@ -75,6 +79,26 @@ void ChessBoard::gameOver(ChessPiece* king){
     addToWindow(gameOver);
 
     //ChessBoard::close();
+}
+
+void ChessBoard::showTurn()
+{
+    removeFromWindow(turnChange);
+    turnChange = new QGraphicsTextItem();
+    turnChange->setZValue(1);
+    turnChange->setFont(QFont("",20));
+
+    if(this->getTurn() == 0){
+        turnChange->setPos(800,50);
+        turnChange->setDefaultTextColor(Qt::black);
+        turnChange->setPlainText("Turn: Black");
+    }
+    else{
+        turnChange->setPos(1010,50);
+        turnChange->setDefaultTextColor(Qt::blue);
+        turnChange->setPlainText("Turn: White");
+    }
+    addToWindow(turnChange);
 }
 
 void ChessBoard::sayTeam()
@@ -127,7 +151,6 @@ void ChessBoard::enemyMove(int posa, int posf)
     if (this->selectedPiece->isFirstMove == true){
         this->selectedPiece->isFirstMove = false;
         if (this->selectedPiece == this->kings[0] || this->selectedPiece == this->kings[1]){
-
             if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
                 qDebug() << "short";
                 this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), true);

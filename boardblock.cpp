@@ -95,6 +95,7 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
 
                     board->selectedPiece = nullptr; //unselect
                     board->changeTurn();
+                    board->showTurn();
                 }
             }
         }

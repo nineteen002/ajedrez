@@ -107,9 +107,24 @@ void ChessBoard::enemyMove(int posa, int posf)
     int rowf = posf/8;
     int colf = posf%8;
     qDebug()<<"Enemy move "<< "rowf:"<< rowf << "colf:" << colf;
-    this->selectedPiece->getCurrentBlock()->setChessPiece(nullptr);
-    this->blocks[rowf][colf]->setChessPiece(this->selectedPiece);
 
+    this->selectedPiece->getCurrentBlock()->setChessPiece(nullptr);
+    BoardBlock* final_pos = this->blocks[rowf][colf];
+    //check if its box selected is NOT empty
+    if(final_pos->hasPiece()){
+        ChessPiece* eaten = final_pos->getChessPiece();
+        if(eaten == this->kings[0] || eaten == this->kings[1]) {
+            qDebug() << "Gameover";
+            this->isGameOver = true;
+            this->gameOver(eaten);
+        }
+        eaten->setCurrentBlock(nullptr);
+        final_pos->setChessPiece(nullptr);
+        this->removeFromWindow(eaten);
+    }
+
+    final_pos->setChessPiece(this->selectedPiece);
+    this->selectedPiece = nullptr;
 }
 
 void ChessBoard::closeEvent(QCloseEvent *)

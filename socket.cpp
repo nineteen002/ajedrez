@@ -186,6 +186,7 @@ void Socket::processRed(char *buffer)
         select_pos = int(buffer[1]);
         mv_pos = int(buffer[2]);
         board->enemyMove(select_pos, mv_pos);
+        board->changeTurn();
     }
     else if (int(buffer[0]) == 9){
 

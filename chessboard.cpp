@@ -56,10 +56,6 @@ void ChessBoard::start(){
     setupWhite();
     //show pieces on the board
     setupBoard();
-    //qDebug() << "DEAD KING" ;
-    //qDebug() << "3" << this->blocks;
-    //blocks[3][4]->setChessPiece(white[9]);//Move horse 1 to middle
-    //blocks[1][1]->getChessPiece()->move();//try to move pawn
 }
 
 void ChessBoard::gameOver(ChessPiece* king){
@@ -83,11 +79,6 @@ void ChessBoard::gameOver(ChessPiece* king){
 
 void ChessBoard::sayTeam()
 {
-    //QGraphicsTextItem* yourTeam = new QGraphicsTextItem();
-//    yourTeam->setPos(900,50);
-//    yourTeam->setZValue(1);
-//    yourTeam->setDefaultTextColor(Qt::black);
-//    yourTeam->setFont(QFont("",30));
     if (loby->socket->current_team == 1){
         //yourTeam->setPlainText("Te tocan Blancas");
         char how[256] = "Server:";

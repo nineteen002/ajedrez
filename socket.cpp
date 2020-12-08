@@ -182,7 +182,7 @@ void Socket::processRed(char *buffer)
         }
         qDebug() << name_enemy;
     }
-    else if (int(buffer[0]) == 4){
+    else if (int(buffer[0]) == 4){       
         select_pos = buffer[1];
         mv_pos = buffer[2];
     }

@@ -194,8 +194,8 @@ void Socket::processRed(char *buffer)
         int _long = int(buffer[1]);
         char *how = 0;
         char msm[256];
-        for  (int i = 3; i <_long; i++){
-            msm[i-3] = buffer[i];
+        for  (int i = 2; i <2+_long; i++){
+            msm[i-2] = buffer[i];
         }
 
         how = name_enemy;

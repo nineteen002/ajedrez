@@ -96,6 +96,22 @@ void ChessBoard::sayTeam()
 
 }
 
+void ChessBoard::enemyMove(int posa, int posf)
+{
+
+    int row = (posa/8);
+    int col = posa%8;
+    qDebug()<<"Enemy move "<< "row:"<< row << "col:" << col;
+    this->selectedPiece = this->blocks[row][col]->getChessPiece();
+    //this->selectedPiece->move();
+    int rowf = posf/8;
+    int colf = posf%8;
+    qDebug()<<"Enemy move "<< "rowf:"<< rowf << "colf:" << colf;
+    this->selectedPiece->getCurrentBlock()->setChessPiece(nullptr);
+    this->blocks[rowf][colf]->setChessPiece(this->selectedPiece);
+
+}
+
 void ChessBoard::closeEvent(QCloseEvent *)
 {
     loby->closeConnection();

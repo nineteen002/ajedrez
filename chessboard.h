@@ -62,6 +62,7 @@ public:
     void start();
     void gameOver(ChessPiece*);
     void sayTeam();
+    void enemyMove(int posa, int posf);
 
     BoardBlock* blocks[8][8];
     ChessPiece* kings[2];

@@ -107,21 +107,7 @@ void ChessBoard::enemyMove(int posa, int posf)
     int rowf = posf/8;
     int colf = posf%8;
     qDebug()<<"Enemy move "<< "rowf:"<< rowf << "colf:" << colf;
-//    if (this->selectedPiece->isFirstMove == true){
-//        this->selectedPiece->isFirstMove = false;
-//        if (this->selectedPiece->getCurrentBlock()->)
-//        if (this->selectedPiece == this->kings[0] || this->selectedPiece == this->kings[1]){
 
-//        }
-//        if (this->selectedPiece->castling == true) { //Castling
-//            if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
-//                this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), true);
-//            }
-//            else if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
-//                this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), false);
-//            }
-//        }
-//    }
     this->selectedPiece->getCurrentBlock()->setChessPiece(nullptr);
     BoardBlock* final_pos = this->blocks[rowf][colf];
     //check if its box selected is NOT empty
@@ -138,6 +124,21 @@ void ChessBoard::enemyMove(int posa, int posf)
     }
 
     final_pos->setChessPiece(this->selectedPiece);
+    if (this->selectedPiece->isFirstMove == true){
+        this->selectedPiece->isFirstMove = false;
+        if (this->selectedPiece == this->kings[0] || this->selectedPiece == this->kings[1]){
+            if (rowf == 6 ||rowf == 2){ //Castling
+                if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
+                        this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), true);
+                    }
+                    else if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
+                        this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), false);
+                    }
+
+            }
+        }
+
+    }
     this->selectedPiece = nullptr;
 }
 

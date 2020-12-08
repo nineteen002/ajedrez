@@ -1,6 +1,7 @@
 #include "chessboard.h"
 #include "boardblock.h"
-
+#include <string.h>
+#include <iostream>
 #include <QDebug>
 #include <QWidget>
 #include <QtWidgets>
@@ -8,6 +9,8 @@
 #include "loby.h"
 
 extern Loby *loby;
+
+
 
 
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
@@ -28,9 +31,9 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
 
     selectedPiece = nullptr;
     this->isGameOver = false;
-    send = new QPushButton(this);
-    send->setText(tr("Enviar"));
+    send = new QPushButton("Enviar",this);
     send->move(1100,690);
+    connect(send, SIGNAL(released()), this, SLOT (sendMsm()));
     message = new QLineEdit(this);
     message->move(800,690);
     message->setMinimumSize(280,10);
@@ -45,11 +48,19 @@ ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     showTurn();
 }
 
-void ChessBoard::sendMSM()
+void ChessBoard::sendMsm()
 {
-    QPushButton *ptr = send;
-    //TODO: Terminar el chat
-
+    char buffer[256];
+    char buffer1[256];
+    std::string cadena = message->text().toStdString(); //message =  qlineedit
+    std::string cadena1 = loby->nameUser.toStdString();
+    strcpy(buffer, cadena.c_str());
+    strcpy(buffer1, cadena1.c_str());
+    strcat(buffer1, ": ");
+    this->chatMessage(buffer1, buffer);
+    Packages *sendMSM = new Packages(9, message->text());
+    loby->socket->sendData(sendMSM->getPackMsm());
+    message->clear();
 }
 
 void ChessBoard::start(){

@@ -39,7 +39,7 @@ private:
     QGraphicsTextItem* turnChange;
 
 private slots:
-    void sendMSM();
+    void sendMsm();
 public:
     ChessBoard(QWidget *parent = 0);
     ~ChessBoard();

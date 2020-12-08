@@ -19,12 +19,13 @@ public:
     ~Loby();
     Socket* socket;
     void closeConnection();
+    QString nameUser;
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_clicked();
 private:
     Ui::Loby *ui;
-    QString nameUser;
+
     Packages *packageLog;
 };
 

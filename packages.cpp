@@ -9,7 +9,10 @@ Packages::Packages(int type, QString text)
     packMsm = new char[256];
     std::string txt = text.toStdString();
     if (type == 0 || type == 9){
-        packMsm[0] = '0';
+        if (type == 0)
+            packMsm[0] = '0';
+        else
+            packMsm[0] = type;
         packMsm[1] = text.length();
         for (int i = 2; i < (text.length()+2); i++ ){
             packMsm[i] = txt[i-2];

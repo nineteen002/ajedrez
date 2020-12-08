@@ -199,7 +199,7 @@ void Socket::processRed(char *buffer)
         }
 
         how = name_enemy;
-
+        strcat(how, ": ");
         board->chatMessage(how, msm);
     }
 }

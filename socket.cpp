@@ -168,10 +168,16 @@ void Socket::processRed(char *buffer)
         current_team = int(buffer[2]);
         qDebug() << "room number: "<< roomNumber << "team: "<< current_team ;
         board->sayTeam();
-    }
-    else if (int(buffer[0]) == 2){
+
+        for(int i = 3; i < error; i++){
+            buffer[i-3] = buffer[i];
+        }
+    }    
+    if (int(buffer[0]) == 2 ){
+        board->start();
+        qDebug() << "Package 2";
         int _long = int(buffer[1]);
-        for  (int i = 2; i <_long; i++){
+        for  (int i = 2; i < 2+_long; i++){
             name_enemy[i-2] = buffer[i];
         }
         qDebug() << name_enemy;

@@ -105,7 +105,7 @@ void ChessBoard::sayTeam()
 {
     if (loby->socket->current_team == 1){
         //yourTeam->setPlainText("Te tocan Blancas");
-        char how[256] = "Server:";
+        char how[256] = "Server: ";
         char msm[256] = "Te tocan Blancas";
         this->chatMessage(how,msm);
     }
@@ -116,8 +116,6 @@ void ChessBoard::sayTeam()
         this->chatMessage(how,msm);
     }
     //addToWindow(yourTeam);
-
-
 }
 
 void ChessBoard::enemyMove(int posa, int posf)

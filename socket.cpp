@@ -191,20 +191,15 @@ void Socket::processRed(char *buffer)
     }
     else if (int(buffer[0]) == 9){
 
-        int quien = int(buffer[1]);
-        int _long = int(buffer[2]);
+        int _long = int(buffer[1]);
         char *how = 0;
         char msm[256];
         for  (int i = 3; i <_long; i++){
             msm[i-3] = buffer[i];
         }
-        if (quien == 1){
-            how = name_enemy;
-        }
-        else if (quien == 0){
 
-            strcat(how,"Servidor: ");
-        }
+        how = name_enemy;
+
         board->chatMessage(how, msm);
     }
 }

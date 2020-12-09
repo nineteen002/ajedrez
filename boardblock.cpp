@@ -73,14 +73,9 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                         board->removeFromWindow(eaten);
                     }
 
-                    if(board->selectedPiece == board->kings[0] || board->selectedPiece == board->kings[1]){
-                        qDebug() << "KING CAN NO LONGER CASTLE";
-                        board->selectedPiece->castling = false;
-                    }
 
                     int pos = (board->selectedPiece->getCurrentBlock()->rowNum*8)+(board->selectedPiece->getCurrentBlock()->columnNum);
                     int newPos = (this->rowNum*8) + (this->columnNum);
-
 
                     Packages *sendMove = new Packages(3, pos, newPos);
                     loby->socket->sendData(sendMove->getPackMsm());
@@ -99,6 +94,11 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                             board->selectedPiece->castling = false;
                             castling(board->selectedPiece->getTeam(), false);
                         }
+                    }
+
+                    if(board->selectedPiece->isFirstMove && (board->selectedPiece == board->kings[0] || board->selectedPiece == board->kings[1])){
+                        qDebug() << "KING CAN NO LONGER CASTLE";
+                        board->selectedPiece->castling = false;
                     }
 
                     board->selectedPiece = nullptr; //unselect

@@ -301,6 +301,7 @@ int Socket::readFromServer(int socketConnection){
         qDebug()  << "Se cerro la conexion" << socketConnection ;
         ::close(socketConnection);
         delete(watcher);
+        board->close();
     }
 
     memset((char*)&buffer,0, sizeof(buffer));

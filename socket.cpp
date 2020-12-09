@@ -289,9 +289,10 @@ int Socket::readFromServer(int socketConnection){
     memset((char*)&buffer,0, sizeof(buffer)); // clean buffer
     error = ::recv(socketConnection, buffer, sizeof(buffer), 0); //negative= errir conectio 0= cerro positive=read bytes
     if(error < 0) {
-        //qDebug()  << "ERROR: Conexion cerrada por un error" << socketConnection << endl;
-        //::close(socketConnection);
-        //delete(watcher);
+        qDebug()  << "ERROR: Conexion cerrada por un error" << socketConnection;
+        ::close(socketConnection);
+        delete(watcher);
+        board->close();
         return -1;
     } else if(error > 0) {
         qDebug() << "Data recieved:" << buffer << "Bytes resividos: " << error;

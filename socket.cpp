@@ -202,7 +202,7 @@ void Socket::processRed(char *buffer)
         char er[2];
         er[0] = error+0;
         char res[] = "server: ";
-        board->chatMessage(res, er);
+        board->chatMessage(res, er , 0);
     }
     else if (int(buffer[0]) == 9){
 

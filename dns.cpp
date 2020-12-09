@@ -27,6 +27,10 @@ void DNS::on_pushButton_2_clicked()
 
 void DNS::on_pushButton_clicked()
 {
+    //delete board;
+    board->hide();
+    board= new ChessBoard();
+    board->show();
     board->start();
     this->close();
     respuesta = 1;

@@ -6,6 +6,7 @@ extern ChessBoard *board;
 King::King(bool team, QGraphicsItem *parent) : ChessPiece(team,parent){
     setImage();
     isFirstMove = true;
+    castling = false;
 }
 
 void King::setImage(){

@@ -84,14 +84,12 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                     board->selectedPiece->getCurrentBlock()->setChessPiece(nullptr); //PREVIOUS BOX CLEAN
                     this->setChessPiece(board->selectedPiece); //Move selected piece to current box
 
-                    if(board->selectedPiece->isFirstMove == true){
-                        if (board->selectedPiece->castling == true) { //Castling
-                            if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
-                                castling(board->selectedPiece->getTeam(), true);
-                            }
-                            else if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
-                                castling(board->selectedPiece->getTeam(), false);
-                            }
+                    if (board->selectedPiece->castling == true) { //Castling
+                        if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
+                            castling(board->selectedPiece->getTeam(), true);
+                        }
+                        else if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
+                            castling(board->selectedPiece->getTeam(), false);
                         }
                     }
 

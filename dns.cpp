@@ -1,6 +1,10 @@
 #include "dns.h"
 #include "ui_dns.h"
 #include <QLineEdit>
+#include "chessboard.h"
+
+extern ChessBoard* board;
+
 DNS::DNS(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DNS)
@@ -17,11 +21,10 @@ DNS::~DNS()
 void DNS::on_pushButton_2_clicked()
 {
     this->close();
+    board->close();
 }
 
 void DNS::on_pushButton_clicked()
 {
-    dnsName = ui->direccion->text();
-    port = ui->puerto->text();
-
+    board->start();
 }

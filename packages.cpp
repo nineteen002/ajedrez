@@ -36,9 +36,9 @@ Packages::Packages(int type , int plase_pos, int final_pos){ //this can send ver
         tmp_pkg[0] = 4;
         tmp_pkg[1] = plase_pos;
     }
-    else if (type == 5){// victoria
+    else if (type == 5){// rematch
         tmp_pkg[0] = 5;
-        tmp_pkg[1] = plase_pos;
+        tmp_pkg[1] = plase_pos; // 0 = no 1 =si
     }
     strncpy(packMsm, tmp_pkg, 3);
     qDebug() << "Type: " << int(packMsm[0]) << ", pos: " << int(packMsm[1]) << "moved to: " << int(packMsm[2]);

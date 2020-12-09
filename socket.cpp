@@ -188,6 +188,10 @@ void Socket::processRed(char *buffer)
         board->changeTurn();
         board->showTurn();
     }
+    else if (int(buffer[0]) == 5){
+        int deseas_continuar = buffer[1];
+
+    }
     else if (int(buffer[0]) == 9){
 
         int _long = int(buffer[1]);

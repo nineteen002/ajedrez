@@ -301,9 +301,18 @@ int Socket::readFromServer(int socketConnection){
 
 void Socket::sendData(char* buffer){
     //TRY SENDING DATA
-    qDebug() << "Sending data";
-    qDebug() << buffer ;
-    send(socketConnection, buffer, int(strlen(buffer)),0);
+    int size_buffer;
+
+    if(buffer[0] == 9){
+        size_buffer = 3;
+        qDebug() << "Sending data limited to size 3";
+    }
+    else{
+        size_buffer = int(strlen(buffer));
+        qDebug() << "Sending data";
+        qDebug() << buffer ;
+    }
+    send(socketConnection, buffer, size_buffer ,0);
 }
 
 void Socket::closeSocket()

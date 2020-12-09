@@ -96,7 +96,7 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                         }
                     }
 
-                    if(board->selectedPiece->isFirstMove && (board->selectedPiece == board->kings[0] || board->selectedPiece == board->kings[1])){
+                    if(board->selectedPiece == board->kings[0] || board->selectedPiece == board->kings[1]){
                         qDebug() << "KING CAN NO LONGER CASTLE";
                         board->selectedPiece->castling = false;
                     }

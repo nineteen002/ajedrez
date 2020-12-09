@@ -7,8 +7,10 @@
 #include <QtWidgets>
 
 #include "loby.h"
+#include "dns.h"
 
 extern Loby *loby;
+DNS* dns;
 
 ChessBoard::ChessBoard(QWidget* parent): QGraphicsView(parent) {
     scene = new QGraphicsScene();
@@ -84,6 +86,8 @@ void ChessBoard::gameOver(ChessPiece* king){
         gameOver->setPlainText("GAME OVER: Black won!");
     }
     addToWindow(gameOver);
+    dns->show();
+    Packages *pack = new Packages(5, dns->respuesta, 0 );
     //ChessBoard::close();
 }
 

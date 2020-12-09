@@ -14,8 +14,7 @@ class DNS : public QMainWindow
 public:
     explicit DNS(QWidget *parent = nullptr);
     ~DNS();
-    QString dnsName;
-    QString port;
+    int respuesta;
 private slots:
     void on_pushButton_2_clicked();
 

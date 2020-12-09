@@ -21,10 +21,12 @@ DNS::~DNS()
 void DNS::on_pushButton_2_clicked()
 {
     this->close();
+    respuesta = 0;
     board->close();
 }
 
 void DNS::on_pushButton_clicked()
 {
     board->start();
+    respuesta = 1;
 }

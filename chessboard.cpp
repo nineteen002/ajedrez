@@ -159,13 +159,15 @@ void ChessBoard::enemyMove(int posa, int posf)
     if (this->selectedPiece->isFirstMove == true){
         this->selectedPiece->isFirstMove = false;
         if (this->selectedPiece == this->kings[0] || this->selectedPiece == this->kings[1]){
-            if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
-                qDebug() << "short";
-                this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), true);
-            }
-            else if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
-                qDebug() << "long";
-                this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), false);
+            if (this->selectedPiece->castling == true) { //Castling
+                if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
+                    this->selectedPiece->castling = false;
+                    this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), true);
+                }
+                else if (this->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
+                    this->selectedPiece->castling = false;
+                    this->selectedPiece->getCurrentBlock()->castling(this->selectedPiece->getTeam(), false);
+                }
             }
         }
 

@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <iostream>
 #include "chessboard.h"
+#include "dns.h"
 
 extern ChessBoard* board;
-
+extern DNS* dns;
 Socket::Socket(QObject *parent) : QObject(parent)
 {
     WSADATA wsaData;
@@ -191,6 +192,7 @@ void Socket::processRed(char *buffer)
     else if (int(buffer[0]) == 5){
         int deseas_continuar = buffer[1];
         if (deseas_continuar == 0){
+            dns->close();
             board->close();
         }
     }

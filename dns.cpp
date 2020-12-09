@@ -28,6 +28,8 @@ void DNS::on_pushButton_2_clicked()
     loby->socket->sendData(pack->getPackMsm());
     this->close();
     board->close();
+    QMessageBox *alert = new QMessageBox();
+    alert->setText("Se cerro la conexion");
 }
 
 void DNS::on_pushButton_clicked()

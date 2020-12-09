@@ -4,6 +4,7 @@
 #include <iostream>
 #include "chessboard.h"
 #include "dns.h"
+#include <QMessageBox>
 
 extern ChessBoard* board;
 extern DNS* dns;
@@ -302,6 +303,9 @@ int Socket::readFromServer(int socketConnection){
         ::close(socketConnection);
         delete(watcher);
         board->close();
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Se cerro la conexion");
+        alert->show();
     }
 
     memset((char*)&buffer,0, sizeof(buffer));

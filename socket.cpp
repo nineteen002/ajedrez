@@ -174,7 +174,7 @@ void Socket::processRed(char *buffer)
         }
     }    
     if (int(buffer[0]) == 2 ){
-        qDebug() << "Entre al paquete 2";
+        memset((char*)&name_enemy,0, sizeof(name_enemy));
         board->start();
         int _long = int(buffer[1]);
         for  (int i = 2; i < 2+_long; i++){
@@ -192,6 +192,7 @@ void Socket::processRed(char *buffer)
 
         int _long = int(buffer[1]);
         char msm[256];
+        memset((char*)&msm,0, sizeof(msm));
         for  (int i = 2; i <(2+_long); i++){
             msm[i-2] = buffer[i];
         }

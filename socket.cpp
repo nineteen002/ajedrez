@@ -304,7 +304,7 @@ int Socket::readFromServer(int socketConnection){
         delete(watcher);
         board->close();
         QMessageBox *alert = new QMessageBox();
-        alert->setText("Se cerro la conexion");
+        alert->setText("El enemigo abandono la partida");
         alert->show();
     }
 

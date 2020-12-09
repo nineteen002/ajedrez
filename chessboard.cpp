@@ -86,6 +86,7 @@ void ChessBoard::gameOver(ChessPiece* king){
         gameOver->setPlainText("GAME OVER: Black won!");
     }
     addToWindow(gameOver);
+    dns = new DNS();
     dns->show();
     Packages *pack = new Packages(5, dns->respuesta, 0 );
     loby->socket->sendData(pack->getPackMsm());

@@ -28,5 +28,6 @@ void DNS::on_pushButton_2_clicked()
 void DNS::on_pushButton_clicked()
 {
     board->start();
+    this->close();
     respuesta = 1;
 }

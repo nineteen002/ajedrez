@@ -190,6 +190,12 @@ void Socket::processRed(char *buffer)
     }
     else if (int(buffer[0]) == 5){
         int deseas_continuar = buffer[1];
+        if (deseas_continuar == 0){
+            board->close();
+        }
+        else{
+
+        }
     }
     else if (int(buffer[0]) == 9){
 

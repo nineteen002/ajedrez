@@ -88,8 +88,7 @@ void ChessBoard::gameOver(ChessPiece* king){
     addToWindow(gameOver);
     dns = new DNS();
     dns->show();
-    Packages *pack = new Packages(5, dns->respuesta, 0 );
-    loby->socket->sendData(pack->getPackMsm());
+
     //ChessBoard::close();
 }
 

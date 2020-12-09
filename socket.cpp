@@ -319,8 +319,9 @@ void Socket::sendData(char* buffer){
     else{
         size_buffer = int(strlen(buffer));
         qDebug() << "Sending data";
-        qDebug() << buffer ;
+
     }
+    qDebug() << "coso: " << int(buffer[1]) ;
     send(socketConnection, buffer, size_buffer ,0);
 }
 

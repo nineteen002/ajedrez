@@ -101,6 +101,9 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="text">
+    <string>ajedrez.elinfelix.xserver.fun</string>
+   </property>
   </widget>
   <widget class="QLineEdit" name="portText">
    <property name="geometry">
@@ -110,6 +113,9 @@
      <width>211</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="text">
+    <string>4994</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_3">

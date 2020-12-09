@@ -174,13 +174,12 @@ void Socket::processRed(char *buffer)
         }
     }    
     if (int(buffer[0]) == 2 ){
+        qDebug() << "Entre al paquete 2";
         board->start();
-        qDebug() << "Package 2";
         int _long = int(buffer[1]);
         for  (int i = 2; i < 2+_long; i++){
             name_enemy[i-2] = buffer[i];
         }
-        qDebug() << name_enemy;
     }
     else if (int(buffer[0]) == 4){       
         select_pos = int(buffer[1]);
@@ -192,15 +191,12 @@ void Socket::processRed(char *buffer)
     else if (int(buffer[0]) == 9){
 
         int _long = int(buffer[1]);
-        char *how = 0;
         char msm[256];
-        for  (int i = 2; i <2+_long; i++){
+        for  (int i = 2; i <(2+_long); i++){
             msm[i-2] = buffer[i];
         }
-
-        how = name_enemy;
-        strcat(how, ": ");
-        board->chatMessage(how, msm);
+        qDebug() << "Name enemy: "<< name_enemy;
+        board->chatMessage(name_enemy, msm);
     }
 }
 

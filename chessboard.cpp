@@ -56,7 +56,7 @@ void ChessBoard::sendMsm()
     std::string cadena1 = loby->nameUser.toStdString();
     strcpy(buffer, cadena.c_str());
     strcpy(buffer1, cadena1.c_str());
-    strcat(buffer1, ": ");
+    qDebug() << "Qstring: " << loby->nameUser << "buffer: "<< buffer1;
     this->chatMessage(buffer1, buffer);
     Packages *sendMSM = new Packages(9, message->text());
     loby->socket->sendData(sendMSM->getPackMsm());
@@ -122,11 +122,10 @@ void ChessBoard::sayTeam()
     }
     else if (loby->socket->current_team == 0){
         //yourTeam->setPlainText("");
-        char how[256] = "Server:";
+        char how[256] = "Server";
         char msm[256] = "Te tocan negras";
         this->chatMessage(how,msm);
     }
-    //addToWindow(yourTeam);
 }
 
 void ChessBoard::enemyMove(int posa, int posf)
@@ -205,9 +204,17 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
     }
 }
 
-void ChessBoard::chatMessage(char *how, char *message)
+void ChessBoard::chatMessage(char how[], char *message)
 {
-    QString mesage = strcat(how, message) ;
+    char nombreUsuario[256];
+    for (int i = 0; i < strlen(how); i++){
+        nombreUsuario[i]=how[i];
+    }
+
+    qDebug()<< "how: "<< how << "message" << message << "Nombre de usuario" << nombreUsuario;
+    strcat(nombreUsuario, ": ");
+    QString mesage = strcat(nombreUsuario, message);
+    qDebug() << "Qstring: "<< mesage;
     chat->append(mesage);
 }
 

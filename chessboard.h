@@ -46,7 +46,7 @@ public:
 
     //drawing
     void drawBoard(int x, int y);
-    void chatMessage(char *how, char* message);
+    void chatMessage(char how[], char* message);
     //setup of board
     void setupBoard();
     void setupWhite();

@@ -86,9 +86,11 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
 
                     if (board->selectedPiece->castling == true) { //Castling
                         if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
+                            board->selectedPiece->castling = false;
                             castling(board->selectedPiece->getTeam(), true);
                         }
                         else if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
+                            board->selectedPiece->castling = false;
                             castling(board->selectedPiece->getTeam(), false);
                         }
                     }

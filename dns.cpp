@@ -23,23 +23,22 @@ DNS::~DNS()
 
 void DNS::on_pushButton_2_clicked()
 {
-    this->close();
     respuesta = 0;
-    board->close();
     Packages *pack = new Packages(5, this->respuesta, 0 );
     loby->socket->sendData(pack->getPackMsm());
+    this->close();
+    board->close();
 }
 
 void DNS::on_pushButton_clicked()
 {
     //delete board;
-
+    respuesta = 1;
+    Packages *pack = new Packages(5, this->respuesta, 0 );
+    loby->socket->sendData(pack->getPackMsm());
     board->hide();
     board= new ChessBoard();
     board->show();
     board->start();
     this->close();
-    respuesta = 1;
-    Packages *pack = new Packages(5, this->respuesta, 0 );
-    loby->socket->sendData(pack->getPackMsm());
 }

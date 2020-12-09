@@ -193,9 +193,6 @@ void Socket::processRed(char *buffer)
         if (deseas_continuar == 0){
             board->close();
         }
-        else{
-
-        }
     }
     else if (int(buffer[0]) == 9){
 

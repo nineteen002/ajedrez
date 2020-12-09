@@ -303,7 +303,7 @@ void Socket::sendData(char* buffer){
     //TRY SENDING DATA
     int size_buffer;
 
-    if(buffer[0] == 9){
+    if(int(buffer[0]) == 3){
         size_buffer = 3;
         qDebug() << "Sending data limited to size 3";
     }

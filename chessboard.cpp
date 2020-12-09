@@ -74,11 +74,12 @@ void ChessBoard::start(){
 }
 
 void ChessBoard::gameOver(ChessPiece* king){
+    removeFromWindow(turnChange);
     QGraphicsTextItem* gameOver = new QGraphicsTextItem();
-    gameOver->setPos(735,50);
+    gameOver->setPos(800,50);
     gameOver->setZValue(1);
     gameOver->setDefaultTextColor(Qt::red);
-    gameOver->setFont(QFont("",20));
+    gameOver->setFont(QFont("",30));
 
     if(king->getSide() == "Black"){
         gameOver->setPlainText("GAME OVER: White won!");

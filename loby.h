@@ -20,6 +20,8 @@ public:
     Socket* socket;
     void closeConnection();
     QString nameUser;
+    QString url;
+    QString ports;
 private slots:
     void on_pushButton_2_clicked();
     void on_pushButton_clicked();

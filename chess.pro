@@ -14,6 +14,7 @@ SOURCES += \
     boardblock.cpp \
     chessboard.cpp \
     chesspiece.cpp \
+    dns.cpp \
     king.cpp \
     knight.cpp \
     loby.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
     boardblock.h \
     chessboard.h \
     chesspiece.h \
+    dns.h \
     king.h \
     knight.h \
     loby.h \
@@ -39,6 +41,7 @@ HEADERS += \
     socket.h
 
 FORMS += \
+    dns.ui \
     loby.ui
 
 # Default rules for deployment.

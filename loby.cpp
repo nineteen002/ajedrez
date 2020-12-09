@@ -25,9 +25,13 @@ void Loby::on_pushButton_2_clicked()
 void Loby::on_pushButton_clicked()
 {
     nameUser = ui->userName->text();
+    url = ui->urlText->text();
+    ports = ui->portText->text();
     packageLog = new Packages(0, nameUser);
-    char serverName[50] = "ajedrez.elinfelix.xserver.fun";
+    char serverName[50];
+    strcpy(serverName,  url.toStdString().c_str());
     char port[5] = "4994";
+    strcpy(port, ports.toStdString().c_str());
     socket = new Socket();
     if (socket->startConnectionWithServer(serverName, port) ==  true){
         socket->sendData(packageLog->getPackMsm());

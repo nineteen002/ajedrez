@@ -153,10 +153,9 @@ void ChessBoard::enemyMove(int posa, int posf)
     //IF ITS A POSSIBLE MOVE
 
     if(!possible) {
-
-        Packages *sendMove = new Packages(8, 1, 0);
-        loby->socket->sendData(sendMove->getPackMsm());
-        qDebug() << "INVALID MOVE OCCURED";
+        //Packages *sendMove = new Packages(8, 1, 0);
+        //loby->socket->sendData(sendMove->getPackMsm());
+        //qDebug() << "INVALID MOVE OCCURED";
     }
 
 

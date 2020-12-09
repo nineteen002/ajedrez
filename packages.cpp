@@ -41,7 +41,7 @@ Packages::Packages(int type , int plase_pos, int final_pos){ //this can send ver
         tmp_pkg[1] = plase_pos; // 0 = no 1 =si
         qDebug() << "respuesta" << plase_pos;
     }
-    else if (type == 8){
+    else if (type == 8){ //error
         tmp_pkg[0] = 8;
         tmp_pkg[1] = 1;
     }

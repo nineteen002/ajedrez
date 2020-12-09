@@ -140,9 +140,28 @@ void ChessBoard::enemyMove(int posa, int posf)
     int rowf = posf/8;
     int colf = posf%8;
     qDebug()<<"Enemy move "<< "rowf:"<< rowf << "colf:" << colf;
+    BoardBlock* final_pos = this->blocks[rowf][colf];
+
+    //MOVEMENT VALIDATION
+    QList <BoardBlock*> moveLocations = this->selectedPiece->getPossibleLocations();
+    bool possible = false;
+    for(int i = 0; i < moveLocations.count(); i++) {
+        if(moveLocations[i] == final_pos){
+            possible = true;
+        }
+    }
+    //IF ITS A POSSIBLE MOVE
+
+    if(!possible) {
+
+        Packages *sendMove = new Packages(8, 1, 0);
+        loby->socket->sendData(sendMove->getPackMsm());
+        qDebug() << "INVALID MOVE OCCURED";
+    }
+
 
     this->selectedPiece->getCurrentBlock()->setChessPiece(nullptr);
-    BoardBlock* final_pos = this->blocks[rowf][colf];
+
     //check if its box selected is NOT empty
     if(final_pos->hasPiece()){
         ChessPiece* eaten = final_pos->getChessPiece();

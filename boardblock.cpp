@@ -73,9 +73,9 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                         board->removeFromWindow(eaten);
                     }
 
-                    if(this->getChessPiece() == board->kings[0] || this->getChessPiece() == board->kings[1]){
+                    if(board->selectedPiece == board->kings[0] || board->selectedPiece == board->kings[1]){
                         qDebug() << "KING CAN NO LONGER CASTLE";
-                        this->getChessPiece()->castling = false;
+                        board->selectedPiece->castling = false;
                     }
 
                     int pos = (board->selectedPiece->getCurrentBlock()->rowNum*8)+(board->selectedPiece->getCurrentBlock()->columnNum);
@@ -84,6 +84,7 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
 
                     Packages *sendMove = new Packages(3, pos, newPos);
                     loby->socket->sendData(sendMove->getPackMsm());
+                    qDebug() << "Type: " << int(sendMove->getPackMsm()[0]) << ", pos: " << int(sendMove->getPackMsm()[1]) << "moved to: " << int(sendMove->getPackMsm()[2]);
                     qDebug() << "enviar posicion: " << sendMove->getPackMsm() << "posicion:" <<pos<<" new position: "<< newPos;
 
                     board->selectedPiece->getCurrentBlock()->setChessPiece(nullptr); //PREVIOUS BOX CLEAN

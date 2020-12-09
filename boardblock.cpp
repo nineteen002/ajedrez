@@ -73,6 +73,11 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                         board->removeFromWindow(eaten);
                     }
 
+                    if(this->getChessPiece() == board->kings[0] || this->getChessPiece() == board->kings[1]){
+                        qDebug() << "KING CAN NO LONGER CASTLE";
+                        this->getChessPiece()->castling = false;
+                    }
+
                     int pos = (board->selectedPiece->getCurrentBlock()->rowNum*8)+(board->selectedPiece->getCurrentBlock()->columnNum);
                     int newPos = (this->rowNum*8) + (this->columnNum);
 

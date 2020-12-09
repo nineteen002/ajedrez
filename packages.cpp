@@ -26,9 +26,11 @@ Packages::Packages(int type , int plase_pos, int final_pos){ //this can send ver
     memset((char*)&tmp_pkg, 0, sizeof(tmp_pkg)); // clean buffer
 
     if (type == 3){// Send move
+        qDebug() << "CREATING PACKAGE 3";
         tmp_pkg[0] = 3;
         tmp_pkg[1] = plase_pos;
         tmp_pkg[2] = final_pos;
+        qDebug() << "Type: " << int(tmp_pkg[0]) << ", pos: " << int(tmp_pkg[1]) << "moved to: " << int(tmp_pkg[2]);
     }
     else if (type == 4){
         tmp_pkg[0] = 4;

@@ -197,6 +197,13 @@ void Socket::processRed(char *buffer)
             board->close();
         }
     }
+    else if (int(buffer[0]) == 8){
+        int error = int(buffer[1]);
+        char er[2];
+        er[0] = error+0;
+        char res[] = "server: ";
+        board->chatMessage(res, er);
+    }
     else if (int(buffer[0]) == 9){
 
         int _long = int(buffer[1]);

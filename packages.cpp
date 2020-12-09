@@ -22,6 +22,7 @@ Packages::Packages(int type, QString text)
 
 Packages::Packages(int type , int plase_pos, int final_pos){ //this can send verification of moving
     packMsm = new char[256];
+    memset((char*)&packMsm,0, sizeof(packMsm)); // clean buffer
     if (type == 3){// Send move
         packMsm[0] = 3;
         packMsm[1] = plase_pos;

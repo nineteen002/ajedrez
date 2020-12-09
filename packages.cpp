@@ -21,21 +21,24 @@ Packages::Packages(int type, QString text)
 }
 
 Packages::Packages(int type , int plase_pos, int final_pos){ //this can send verification of moving
+    char tmp_pkg[256];
     packMsm = new char[256];
-    memset((char*)&packMsm,0, sizeof(packMsm)); // clean buffer
+    memset((char*)&tmp_pkg, 0, sizeof(tmp_pkg)); // clean buffer
+
     if (type == 3){// Send move
-        packMsm[0] = 3;
-        packMsm[1] = plase_pos;
-        packMsm[2] = final_pos;
+        tmp_pkg[0] = 3;
+        tmp_pkg[1] = plase_pos;
+        tmp_pkg[2] = final_pos;
     }
     else if (type == 4){
-        packMsm[0] = 4;
-        packMsm[1] = plase_pos;
+        tmp_pkg[0] = 4;
+        tmp_pkg[1] = plase_pos;
     }
     else if (type == 5){// victoria
-        packMsm[0] = 5;
-        packMsm[1] = plase_pos;
+        tmp_pkg[0] = 5;
+        tmp_pkg[1] = plase_pos;
     }
+    strncpy(packMsm, tmp_pkg, 3);
 }
 
 char *Packages::getPackMsm() const

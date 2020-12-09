@@ -81,15 +81,17 @@ void BoardBlock::mousePressEvent(QGraphicsSceneMouseEvent *){
                     loby->socket->sendData(sendMove->getPackMsm());
                     qDebug() << "enviar posicion: " << sendMove->getPackMsm() << "posicion:" <<pos<<" new position: "<< newPos;
 
-                    board->selectedPiece->getCurrentBlock()->setChessPiece(nullptr); //PREVIOUS BOX CLEAN
-                    this->setChessPiece(board->selectedPiece); //Move selected piece to current box
+                    if(board->selectedPiece->isFirstMove == true){
+                        board->selectedPiece->getCurrentBlock()->setChessPiece(nullptr); //PREVIOUS BOX CLEAN
+                        this->setChessPiece(board->selectedPiece); //Move selected piece to current box
 
-                    if (board->selectedPiece->castling == true) { //Castling
-                        if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
-                            castling(board->selectedPiece->getTeam(), true);
-                        }
-                        else if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
-                            castling(board->selectedPiece->getTeam(), false);
+                        if (board->selectedPiece->castling == true) { //Castling
+                            if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 6){
+                                castling(board->selectedPiece->getTeam(), true);
+                            }
+                            else if (board->selectedPiece->getCurrentBlock()->getColumnLocation() == 2) {
+                                castling(board->selectedPiece->getTeam(), false);
+                            }
                         }
                     }
 

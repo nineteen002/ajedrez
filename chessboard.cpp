@@ -116,7 +116,7 @@ void ChessBoard::sayTeam()
 {
     if (loby->socket->current_team == 1){
         //yourTeam->setPlainText("Te tocan Blancas");
-        char how[256] = "Server: ";
+        char how[256] = "Server ";
         char msm[256] = "Te tocan Blancas";
         this->chatMessage(how,msm);
     }
@@ -207,6 +207,7 @@ void ChessBoard::drawBoard(int x, int y){ //recieves inital coordinates
 void ChessBoard::chatMessage(char how[], char *message)
 {
     char nombreUsuario[256];
+    memset((char*)&nombreUsuario,0, sizeof(nombreUsuario));
     for (int i = 0; i < strlen(how); i++){
         nombreUsuario[i]=how[i];
     }
